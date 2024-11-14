@@ -118,23 +118,3 @@ class Validator:
         else:
             raise ValueError(message)
 
-    @classmethod
-    def blood_type_validator(cls, blood_type, message):
-        blood_types = ["A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+"]
-        if isinstance(blood_type, str) and blood_type in blood_types:
-            return blood_type
-        else:
-            raise ValueError(message)
-
-    @classmethod
-    def specialty_validator(cls, specialty, message):
-        specialties = [
-            "Oncologist", "Hematologist", "Rheumatologist", "Endocrinologist", "Neurologist", "Psychiatrist",
-            "Neurosurgeon", "Orthopedic Surgeon", "Plastic Surgeon", "Urological Surgeon", "Pediatric Surgeon",
-            "Neonatologist", "Cardiologist", "Dermatologist", "Ophthalmologist", "General Surgeon",
-            "Radiologist", "Emergency Medicine", "Anesthesiologist", "Pathologist", "Pediatrician",
-        ]
-        if isinstance(specialty, str) and specialty in specialties:
-            return specialty
-        else:
-            raise ValueError(message)

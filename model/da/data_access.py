@@ -3,13 +3,12 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import create_database, database_exists
 from model.entity.base import Base
 from sqlalchemy.ext.declarative import declarative_base
-
 Base = declarative_base()
 
 
 class DataAccess:
     def __init__(self, class_name):
-        connection_string = "mysql+pymysql://root:root@localhost:3306/HMS"
+        connection_string = "mysql+pymysql://root:root@localhost:3306/office_automation"
         if not database_exists(connection_string):
             create_database(connection_string)
 
