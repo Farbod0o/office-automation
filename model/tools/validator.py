@@ -102,19 +102,3 @@ class Validator:
         else:
             raise ValueError(message)
 
-    @classmethod
-    def role_validator(cls, role, message):
-        roles = ["Doctor", "Patient", "Admin", ]
-        if isinstance(role, str) and role in roles:
-            return role
-        else:
-            raise ValueError(message)
-
-    @classmethod
-    def gender_validator(cls, gender, message):
-        genders = ["Male", "Female", "Other"]
-        if isinstance(gender, str) and gender in genders:
-            return gender
-        else:
-            raise ValueError(message)
-

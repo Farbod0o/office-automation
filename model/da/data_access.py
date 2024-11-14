@@ -1,13 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import create_database, database_exists
-from model.entity.base import Base
 from sqlalchemy.ext.declarative import declarative_base
+
 Base = declarative_base()
 
 
 class DataAccess:
-    def __init__(self, class_name):
+    def __init__(self, entity_class):
         connection_string = "mysql+pymysql://root:root@localhost:3306/office_automation"
         if not database_exists(connection_string):
             create_database(connection_string)
@@ -15,9 +15,9 @@ class DataAccess:
         engine = create_engine(connection_string)
         Base.metadata.create_all(engine)
 
-        sessions = sessionmaker(bind=engine)
-        self.session = sessions()
-        self.class_name = class_name
+        Session = sessionmaker(bind=engine)
+        self.session = Session()
+        self.entity_class = entity_class
 
     def save(self, entity):
         try:
@@ -26,6 +26,7 @@ class DataAccess:
             self.session.refresh(entity)
             return entity
         except Exception as e:
+            self.session.rollback()
             raise ValueError("Error adding {} to database: {}".format(entity, e))
 
     def edit(self, entity):
@@ -39,23 +40,24 @@ class DataAccess:
         return entity
 
     def find_all(self):
-        entity_list = self.session.query(self.class_name).all()
-        return entity_list
+        return self.session.query(self.entity_class).all()
 
     def find_by_id(self, id):
-        entity = self.session.get(self.class_name, id)
-        return entity
+        return self.session.query(self.entity_class).get(id)
 
     def find_by(self, find_statement):
-        entity = self.session.query(self.class_name).filter(find_statement).all()
-        return entity
+        return self.session.query(self.entity_class).filter(find_statement).all()
 
     def find_by_conditions(self, conditions, join_statement, join_class):
-        _info = (
-            self.session.query(self.class_name).join(join_class, join_statement).filter(conditions).all())
-        return _info
+        return (
+            self.session.query(self.entity_class)
+            .join(join_class, join_statement)
+            .filter(conditions)
+            .all()
+        )
 
     def find_by_conditions2(self, conditions):
-        _info = (
-            self.session.query(self.class_name).filter(conditions).all())
-        return _info
+        return self.session.query(self.entity_class).filter(conditions).all()
+
+    def close(self):
+        self.session.close()
