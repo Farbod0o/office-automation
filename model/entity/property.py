@@ -102,7 +102,6 @@ class Property(Base):
         return self._delivery_date
 
     @delivery_date.setter
-    @pattern_validator(r"^[0-9]{2,10}$", " معتبر نیست!")
     def delivery_date(self, delivery_date):
         self._delivery_date = delivery_date
 
