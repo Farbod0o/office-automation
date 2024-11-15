@@ -30,7 +30,6 @@ class Organization(Base):
         return self._code
 
     # Property for name
-
     @property
     def name(self):
         return self._name
