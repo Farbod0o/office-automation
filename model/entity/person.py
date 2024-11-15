@@ -1,23 +1,21 @@
 from sqlalchemy import Integer, Column, String
-from model.entity.bace import Bace
+from model.da.data_access import Base
 from model.tools.validator import pattern_validator
 
 
-class Person(Bace):
-    __tablename__ = "Person"
-    person_code = Column(Integer, nullable=False, unique=True, index=True)
-    sex = Column(String(30), nullable=False)
-    name = Column(String(30), nullable=False)
-    last_name = Column(String(30), nullable=False)
-    national_code = Column(Integer, nullable=False, unique=True, index=True)
+class Person(Base):
+    __tablename__ = "person_tbl"
+    _id = Column(Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
+    _sex = Column(String(30), nullable=False)
+    _name = Column(String(30), nullable=False)
+    _last_name = Column(String(30), nullable=False)
+    _national_code = Column(Integer, nullable=False, unique=True, index=True)
 
-
-def __init__(self, person_code, sex, name, last_name, national_code):
-    self.person_code = person_code
-    self.sex = sex
-    self.name = name
-    self.last_name = last_name
-    self.national_code = national_code
+    def __init__(self, sex, name, last_name, national_code):
+        self.sex = sex
+        self.name = name
+        self.last_name = last_name
+        self.national_code = national_code
 
     @property
     def name(self):
@@ -25,7 +23,7 @@ def __init__(self, person_code, sex, name, last_name, national_code):
 
     @name.setter
     @pattern_validator(r'^[A-Za-zآ-ی]{1,16}$',
-                   "نام فقط باید دارای حروف الفبا (لاتین یا فارسی) و حداکثر 16 کاراکتر باشد.")
+                       "نام فقط باید دارای حروف الفبا (لاتین یا فارسی) و حداکثر 16 کاراکتر باشد.")
     def name(self, value):
         self._name = value
 
