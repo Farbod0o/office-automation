@@ -1,9 +1,7 @@
 from enum import Enum
-
 from sqlalchemy import Column, String, Integer
-
-from Bace.Bace import Bace
-from validator import pattern_validator
+from model.tools.validator import pattern_validator
+from model.entity.bace import Bace
 
 
 class System_User(Bace):
@@ -30,7 +28,6 @@ def __init__(self, user_code, pesonal_code, part_code, user_name, password, role
 
 
 
-    # Getter and setter for 'user_code'
 
 
 @property
@@ -42,12 +39,11 @@ def user_code(self):
 
 @user_code.setter
 @pattern_validator(r'^[A-Za-z0-9]{1,10}$',
-                   "User code must contain alphanumeric characters and be up to 10 characters long.")
+                   "کد کاربر باید دارای نویسه های الفبایی عددی و حداکثر 10 کاراکتر باشد.")
 def user_code(self, value):
     self._user_code = value
 
 
-# Getter and setter for 'personal_code'
 @property
 def personal_code(self):
     return self._personal_code
@@ -55,12 +51,11 @@ def personal_code(self):
 
 @personal_code.setter
 @pattern_validator(r'^[A-Za-z0-9]{1,12}$',
-                   "Personal code must contain alphanumeric characters and be up to 12 characters long.")
+                   "کد شخصی باید دارای نویسه های الفبایی عددی و حداکثر 12 کاراکتر باشد.")
 def personal_code(self, value):
     self._personal_code = value
 
 
-# Getter and setter for 'part_code'
 @property
 def part_code(self):
     return self._part_code
@@ -68,12 +63,11 @@ def part_code(self):
 
 @part_code.setter
 @pattern_validator(r'^[A-Za-z0-9]{1,8}$',
-                   "Part code must contain alphanumeric characters and be up to 8 characters long.")
+                   "کد قسمت باید دارای نویسه های الفبایی عددی و حداکثر 8 کاراکتر باشد.")
 def part_code(self, value):
     self._part_code = value
 
 
-# Getter and setter for 'user_name'
 @property
 def user_name(self):
     return self._user_name
@@ -81,42 +75,39 @@ def user_name(self):
 
 @user_name.setter
 @pattern_validator(r'^[A-Za-z0-9_]{1,20}$',
-                   "Username must contain alphanumeric characters, underscores, and be up to 20 characters long.")
+                   "نام کاربری باید دارای نویسه های الفبایی عددی و حداکثر 20 کاراکتر باشد.")
 def user_name(self, value):
     self._user_name = value
 
 
-# Getter and setter for 'password'
 @property
 def password(self):
     return self._password
 
 
 @password.setter
-@pattern_validator(r'^[\S]{8,32}$', "Password must be 8 to 32 characters long and cannot contain spaces.")
+@pattern_validator(r'^[\S]{8,32}$', "رمز عبور باید 8 تا 32 کاراکتر باشد و نباید دارای فاصله باشد.")
 def password(self, value):
     self._password = value
 
 
-# Getter and setter for 'role'
 @property
 def role(self):
     return self._role
 
 
 @role.setter
-@pattern_validator(r'^[A-Za-z]{1,15}$', "Role must contain alphabetic characters and be up to 15 characters long.")
+@pattern_validator(r'^[A-Za-z]{1,15}$', "نقش باید دارای حروف الفبا و حداکثر 15 کاراکتر باشد.")
 def role(self, value):
     self._role = value
 
 
-# Getter and setter for 'status'
 @property
 def status(self):
     return self._status
 
 
 @status.setter
-@pattern_validator(r'^(Active|Inactive)$', "Status must be either 'Active' or 'Inactive'.")
+@pattern_validator(r'^(Active|Inactive|فعال|غیرفعال)$', "وضعیت باید فعال یا غیرفعال باشد.")
 def status(self, value):
     self._status = value
