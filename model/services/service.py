@@ -1,5 +1,4 @@
 from model.da.data_access import DataAccess
-from model.tools.decorators import exception_handling
 
 
 class Service:

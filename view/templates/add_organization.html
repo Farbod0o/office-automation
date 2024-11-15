@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Organization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <form action="/add-organization" method="post">
+        <h2>اضافه کردن سازمان</h2>
+        <label for="name">نام سازمان</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="slogan">شعار سازمان</label>
+        <input type="text" id="slogan" name="slogan" required>
+
+        <label for="logo">ادرس لوگو</label>
+        <input type="text" id="logo" name="logo" required>
+
+        <label for="duties">شرح وظایف</label>
+        <textarea id="duties" name="duties" required></textarea>
+
+        <label for="address">آدرس سازمان</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="telephone">تلفن سازمان</label>
+        <input type="text" id="telephone" name="telephone" required>
+
+        <label for="description">توضیحات</label>
+        <textarea id="description" name="description"></textarea>
+
+        <label for="head_id">ایدی مدیر</label>
+        <input type="number" id="head_id" name="head_id">
+
+        <button type="submit">ثبت</button>
+    </form>
+</body>
+</html>
