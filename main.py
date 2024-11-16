@@ -27,5 +27,4 @@ async def add_organization(
     if success:
         return {"message": "سازمان با موفقیت اضافه شد!"}
     else:
-        print(message)
         return {"error": f"{message}"}

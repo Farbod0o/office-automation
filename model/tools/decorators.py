@@ -5,7 +5,6 @@ def exception_handling(function):
     def inner(*args, **kwargs):
         try:
             output = function(*args, **kwargs)
-            print(function.__name__)
             if not "find" in function.__name__:
                 Logger.info(f"{function.__qualname__}{args[1:]} [RETURNED] : {output[1]}")
             else:

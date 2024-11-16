@@ -12,10 +12,19 @@ class Person(Base):
     _national_code = Column(Integer, nullable=False, unique=True, index=True)
 
     def __init__(self, sex, name, last_name, national_code):
+        self.id = None
         self.sex = sex
         self.name = name
         self.last_name = last_name
         self.national_code = national_code
+
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     @property
     def name(self):
