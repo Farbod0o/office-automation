@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, Column, String
+from sqlalchemy import Integer, Column, String , relationship
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
 
@@ -10,6 +10,9 @@ class Person(Base):
     _name = Column(String(30), nullable=False)
     _last_name = Column(String(30), nullable=False)
     _national_code = Column(Integer, nullable=False, unique=True, index=True)
+
+    system_user = relationship("System_User", back_populates="person", uselist=False)
+
 
     def __init__(self, sex, name, last_name, national_code):
         self.id = None
@@ -64,3 +67,8 @@ class Person(Base):
     @pattern_validator(r'^\d{10}$', "کد ملی باید دقیقاً شامل 10 رقم عددی باشد.")
     def national_code(self, value):
         self._national_code = value
+
+
+
+
+
