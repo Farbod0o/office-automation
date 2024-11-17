@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime , relationship
 from model.entity.base import Base
 from model.tools.validator import pattern_validator
 
@@ -17,6 +17,12 @@ class Property(Base):
     _personal_code_delivery = Column("personal_code_delivery", Integer, nullable=False)
     _image = Column("image", String(30), nullable=False)
     _status = Column("status", String(100), nullable=False)
+
+
+    person = relationship("Person", foreign_keys=[_personal_code_delivery])
+    massages = relationship("Massage", back_populates="property")
+
+
 
     def __init__(self, property_code, group_code, property_name, property_description, label_code,
                  count, property_price, delivery_date, section_code, personal_code_delivery
