@@ -1,6 +1,7 @@
 from model.entity.person import Person
 from model.entity.department import Department
 from model.entity.organization import Organization
+from model.entity.group import Group
+from model.entity.ticket import Ticket
 
-print("?")
-__all__ = ["Person", "Department","Organization"]
+__all__ = ["Person", "Department","Organization","Group","Ticket"]

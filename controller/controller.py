@@ -1,9 +1,23 @@
+from xml.dom.minidom import Entity
+
 from model.entity import *
 from model.tools.decorators import exception_handling
 from model.services.service import Service
 
 
 class Controller:
+
+    @classmethod
+    @exception_handling
+    def add_ticket(cls,user, title, ticket_datetime, group, response_type):
+        ticket = Ticket(user, title, ticket_datetime, group, response_type)
+        return True,Service.save(ticket,Ticket)
+    @classmethod
+    @exception_handling
+    def add_Group(cls,name,parent_group=None):
+        gp = Group(name,parent_group)
+        return True,Service.save(gp,Group)
+
     @classmethod
     @exception_handling
     def add_organization(cls, name, slogan, logo, duties, address, telephone, description="", head_id=None):

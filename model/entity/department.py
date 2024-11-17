@@ -6,7 +6,6 @@ from sqlalchemy.orm import relationship
 class Department(Base):
     __tablename__ = "department_tbl"
 
-    # Columns
     _id = Column("department_code", Integer, primary_key=True, autoincrement=True)
     _name = Column("department_name", String(30), nullable=False, unique=True)
     _duties = Column("department_duties", String(100), nullable=False)
@@ -25,7 +24,6 @@ class Department(Base):
 
 
 
-    # Constructor
     def __init__(self, name, duties, location, phone_number, extension, access_lvl, description="", manager=None, deputy=None, parent_department=None):
         self._id = None
         self._name = name
@@ -36,18 +34,18 @@ class Department(Base):
         self._access_level = access_lvl
         self._description = description
 
-        # Setting relationships
         self._manager_id = manager.id if manager else None
         self._deputy_id = deputy.id if deputy else None
         self._parent_department_id = parent_department._id if parent_department else None
 
 
-    # Property for code
     @property
-    def code(self):
-        return self._code
+    def id(self):
+        return self._id
 
-    # Property for name
+    @id.setter
+    def id(self, value):
+        self._id = value
     @property
     def name(self):
         return self._name
