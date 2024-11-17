@@ -1,5 +1,5 @@
 from enum import Enum
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer , relationship
 from model.tools.validator import pattern_validator
 from model.entity.bace import Bace
 
@@ -13,6 +13,9 @@ class System_User(Bace):
     password = Column(String(32), nullable=False)
     role = Column(String(15), nullable=False)
     status = Column(Enum("Active", "Inactive", name="status_enum"), nullable=False)
+
+    massages = relationship("Massage", back_populates="person")
+    person = relationship("Person", back_populates="system_user", uselist=False)
 
 
 def __init__(self, user_code, pesonal_code, part_code, user_name, password, role, status=True):
