@@ -1,5 +1,3 @@
-from xml.dom.minidom import Entity
-
 from model.entity import *
 from model.tools.decorators import exception_handling
 from model.services.service import Service
@@ -7,6 +5,25 @@ from model.services.service import Service
 
 class Controller:
 
+    @classmethod
+    @exception_handling
+    def add_entity(cls,obj,entity):
+        return True,Service.save(obj,entity)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_id(cls, entity, user_id):
+        return Service.find_by_id(entity, user_id)
+
+    @classmethod
+    @exception_handling
+    def find_by(cls, entity, statement):
+        return Service.find_by(entity, statement)
+
+
+
+#_____________________________________FARBOD_______________________________________#
     @classmethod
     @exception_handling
     def add_ticket(cls,user, title, ticket_datetime, group, response_type):
@@ -24,11 +41,6 @@ class Controller:
         org = Organization(name, slogan, logo, duties, address, telephone, description)
         return True, Service.save(org, Organization)
 
-    @classmethod
-    @exception_handling
-    def add_person(cls, sex, name, last_name, national_code):
-        pers = Person(sex, name, last_name, national_code)
-        return True, Service.save(pers, Person)
 
     @classmethod
     @exception_handling
@@ -38,12 +50,13 @@ class Controller:
                        deputy, parent_department)
         return True, Service.save(dep, Department)
 
-    @classmethod
-    @exception_handling
-    def find_by_id(cls, entity, user_id):
-        return Service.find_by_id(entity, user_id)
+# _____________________________________________________________________________________#
 
+
+
+# ____________________________________AMIRHOSSEIN______________________________________#
     @classmethod
     @exception_handling
-    def find_by(cls, entity, statement):
-        return Service.find_by(entity, statement)
+    def add_person(cls, sex, name, last_name, national_code):
+        pers = Person(sex, name, last_name, national_code)
+        return True, Service.save(pers, Person)
