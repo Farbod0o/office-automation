@@ -1,5 +1,3 @@
-from xml.dom.minidom import Entity
-
 from model.entity import *
 from model.tools.decorators import exception_handling
 from model.services.service import Service
