@@ -1,10 +1,10 @@
 from enum import Enum
 from sqlalchemy import Column, String, Integer , relationship
 from model.tools.validator import pattern_validator
-from model.entity.bace import Bace
+from model.entity.base import Base
 
 
-class System_User(Bace):
+class System_User(Base):
     __tablename__ = "system_users"
     user_code = Column(Integer, primary_key=True , unique=True)
     personal_code = Column(Integer, nullable=False, unique=True, index=True)
