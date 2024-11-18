@@ -24,7 +24,7 @@ class ProductGroup(Base):
         return self._group_code
 
     @group_code.setter
-    @pattern_validator(r"^[0-9]{2,30}$", "معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", " کد گروه معتبر نیست !")
     def group_code(self, group_code):
         self._group_code = group_code
 
@@ -33,7 +33,7 @@ class ProductGroup(Base):
         return self._product_group_name
 
     @product_group_name.setter
-    @pattern_validator(r"^[A-Za-z]{2,30}$", "معتبر نیست!")
+    @pattern_validator(r"^[A-Za-z]{2,30}$", "نام گروه کالا معتبر نیست!")
     def product_group_name(self, product_group_name):
         self._product_group_name = product_group_name
 
@@ -42,7 +42,7 @@ class ProductGroup(Base):
         return self._group_code
 
     @group_code_up.setter
-    @pattern_validator(r"^[0-9]{2,30}$", "معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", " کد گروه بالا دستی معتبر نیست!")
     def group_code_up(self, group_code_up):
         self._group_code_up = group_code_up
 
@@ -51,7 +51,7 @@ class ProductGroup(Base):
         return self._description
 
     @product_group_name.setter
-    @pattern_validator(r"^[A-Za-z]{2,200}$", "معتبر نیست!")
+    @pattern_validator(r"^[A-Za-z]{2,200}$", " توضیحات معتبر نیست!")
     def description(self, description):
         self._description = description
 

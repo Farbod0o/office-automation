@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime , relationship
 from model.entity.base import Base
 from model.tools.validator import pattern_validator
+from datetime import datetime
 
 
 class Property(Base):
@@ -19,8 +20,8 @@ class Property(Base):
     _status = Column("status", String(100), nullable=False)
 
 
-    person = relationship("Person", foreign_keys=[_personal_code_delivery])
-    massages = relationship("Massage", back_populates="property")
+    #person = relationship("Person", foreign_keys=[_personal_code_delivery])
+    #massages = relationship("Massage", back_populates="property")
 
 
 
@@ -45,7 +46,7 @@ class Property(Base):
         return self._property_code
 
     @property_code.setter
-    @pattern_validator(r"^[0-9]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", "  کد اموال معتبر نیست!")
     def property_code(self, property_code):
         self._property_code = property_code
 
@@ -54,7 +55,7 @@ class Property(Base):
         return self._group_code
 
     @group_code.setter
-    @pattern_validator(r"^[0-9]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", "  کد گروه معتبر نیست!")
     def group_code(self, group_code):
         self._group_code = group_code
 
@@ -63,7 +64,7 @@ class Property(Base):
         return self._property_name
 
     @property_name.setter
-    @pattern_validator(r"^[A-Za-z]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[A-Za-z]{2,30}$", "   نام اموال معتبر نیست!")
     def property_name(self, property_name):
         self._property_name = property_name
 
@@ -72,7 +73,7 @@ class Property(Base):
         return self._property_description
 
     @property_description.setter
-    @pattern_validator(r"^[A-Za-z]{2,200}$", " معتبر نیست!")
+    @pattern_validator(r"^[A-Za-z]{2,200}$", "  شرح اموال معتبر نیست!")
     def description(self, property_description):
         self._property_description = property_description
 
@@ -81,7 +82,7 @@ class Property(Base):
         return self._label_code
 
     @label_code.setter
-    @pattern_validator(r"^[0-9]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", "  کد برچسب اموال معتبر نیست!")
     def label_code(self, property_code):
         self._label_code = property_code
 
@@ -90,7 +91,7 @@ class Property(Base):
         return self._count
 
     @count.setter
-    @pattern_validator(r"^[0-9]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", "  تعداد معتبر نیست!")
     def count(self, count):
         self._count = count
 
@@ -99,7 +100,7 @@ class Property(Base):
         return self._property_price
 
     @property_price.setter
-    @pattern_validator(r"^[0-9]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", "  قیمت اموال معتبر نیست!")
     def property_price(self, property_price):
         self._property_price = property_price
 
@@ -109,14 +110,17 @@ class Property(Base):
 
     @delivery_date.setter
     def delivery_date(self, delivery_date):
-        self._delivery_date = delivery_date
+        if isinstance(delivery_date,datetime):
+            self._delivery_date = delivery_date
 
+        else:
+            raise ValueError("تاریخ معتبر نیست")
     @property
     def section_code(self):
         return self._section_code
 
     @section_code.setter
-    @pattern_validator(r"^[0-9]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", " کد بخش تحویل گیرنده معتبر نیست!")
     def section_code(self, section_code):
         self._section_code = section_code
 
@@ -125,7 +129,7 @@ class Property(Base):
         return self._personal_code_delivery
 
     @personal_code_delivery.setter
-    @pattern_validator(r"^[0-9]{2,30}$", " معتبر نیست!")
+    @pattern_validator(r"^[0-9]{2,30}$", "کد شخص تحویل گیرنده معتبر نیست!")
     def personal_code_delivery(self, personal_code_delivery):
         self._personal_code_delivery = personal_code_delivery
 
@@ -142,7 +146,7 @@ class Property(Base):
         return self._status
 
     @status.setter
-    @pattern_validator(r"^[a-zA-Z]$", " معتبر نیست!")
+    @pattern_validator(r"^[a-zA-Z]$", "وضعیت معتبر نیست!")
     def status(self, status):
         self._status = status
 
