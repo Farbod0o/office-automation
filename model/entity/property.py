@@ -21,7 +21,7 @@ class Property(Base):
 
 
     #person = relationship("Person", foreign_keys=[_personal_code_delivery])
-    #massages = relationship("Massage", back_populates="property")
+    massages = relationship("Massage", back_populates="property")
 
 
 
