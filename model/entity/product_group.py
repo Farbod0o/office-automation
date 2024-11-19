@@ -16,8 +16,6 @@ class ProductGroup(Base):
         self._group_code_up = group_code_up
         self._description = description
 
-    def __repr__(self):
-        return f"{self.__dict__}"
 
     @property
     def group_code(self):
