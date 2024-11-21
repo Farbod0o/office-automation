@@ -12,7 +12,7 @@ class System_User(Base):
     user_name = Column(String(20), nullable=False, unique=True)
     password = Column(String(32), nullable=False)
     role = Column(String(15), nullable=False)
-    status = Column(Enum("Active", "Inactive", name="status_enum"), nullable=False)
+    status = Column(Enum("Active", "Inactive"), nullable=False)
 
     massages = relationship("Massage", back_populates="person")
     person = relationship("Person", back_populates="system_user", uselist=False)
