@@ -72,3 +72,22 @@ class Controller:
     def add_person(cls, sex, name, last_name, national_code):
         pers = Person(sex, name, last_name, national_code)
         return True, Service.save(pers, Person)
+
+    # ____________________________________MAHTAB______________________________________#
+    @classmethod
+    @exception_handling
+    def add_bank(cls, name, account_number, branch_code):
+        ban = Bank( name, account_number, branch_code)
+        return True, Service.save(ban, Bank)
+    
+    @classmethod
+    @exception_handling
+    def add_transaction(cls,  payment_method, amount, date, tracking_code):
+        Transactn = Transaction(  payment_method, amount, date, tracking_code)
+        return True, Service.save(Transactn, Transaction)    
+   
+    @classmethod
+    @exception_handling
+    def add_payment(cls,  payment_method, amount, date, tracking_code):
+        Paymnt = Payment(  payment_method, amount, date, tracking_code)
+        return True, Service.save(Paymnt, Payment)
