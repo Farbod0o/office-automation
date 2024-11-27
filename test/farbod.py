@@ -1,10 +1,10 @@
+from controller.controller import Controller
 from model.entity.department import Department
 from model.entity.section import Section
 
-dep = Department("Department",1,"Department.png","task","address",
+Controller.add_department("Department3",1,"Department.png","task","address",
                  "02122361258","nadarad")
-sec = Section("Section","sec address","02149499293","1",
-              "full","1",None,None,dep)
+dep = Controller.find_by_id(Department,1)
 
-print(sec.address)
-print(dep.address)
+Controller.add_section(name="Section",address="sec address",phone_number="02149499293",internal_code="1",
+              access_lvl="full",section_num="1",parent_section_num=None,description="None",department=dep)

@@ -7,7 +7,7 @@ from model.tools.validator import pattern_validator
 
 class Department(Base):
     __tablename__ = "department_tbl"
-    _code = Column("organization_code", Integer, primary_key=True, autoincrement=True)
+    _id = Column("_id", Integer, primary_key=True, autoincrement=True)
     _name = Column("organization_name", String(30), nullable=False, unique=True)
     _logo = Column("organization_logo", String(20), nullable=False, unique=False)
     _address = Column("organization_address", String(100), nullable=False, unique=False)
@@ -18,14 +18,19 @@ class Department(Base):
     sections = relationship("Section", back_populates="dep_id")
 
     def __init__(self, name, department_num, logo, task, address, phone_number, description=""):
-        self.id = None
-        self.name = name
-        self.department_num = department_num
-        self.logo = logo
-        self.task = task
-        self.address = address
-        self.phone_number = phone_number
-        self.description = description
+        self._id = None
+        self._name = name
+        self._department_num = department_num
+        self._logo = logo
+        self._task = task
+        self._address = address
+        self._phone_number = phone_number
+        self._description = description
+
+
+    @property
+    def id(self):
+        return self._id
 
     @property
     def name(self):

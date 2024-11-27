@@ -6,14 +6,14 @@ from sqlalchemy.orm import relationship
 class Ticket(Base):
     __tablename__ = "ticket_tbl"
     _id = Column("ticket_id", Integer, primary_key=True, autoincrement=True)
-    _userID = Column("user_id", Integer, ForeignKey("person_tbl._id"), nullable=False)
+    # _userID = Column("user_id", Integer, ForeignKey("person_tbl._id"), nullable=False)
     _title = Column("department_title", String(30), nullable=False, unique=True)
     _ticket_datetime = Column("department_duties", DATETIME, nullable=False)
     _response_type = Column("response_type", String(30), nullable=False)
-    _group = Column(Integer, ForeignKey("group_tbl._id"), nullable=True)
-
-    user = relationship("Person", foreign_keys=[_userID], lazy='joined')
-    gp = relationship("Group", foreign_keys=[_group], lazy='joined')
+    # _group = Column(Integer, ForeignKey("group_tbl._id"), nullable=True)
+    #
+    # user = relationship("Person", foreign_keys=[_userID], lazy='joined')
+    # gp = relationship("Group", foreign_keys=[_group], lazy='joined')
 
 
     def __init__(self,user, title, ticket_datetime, group, response_type):

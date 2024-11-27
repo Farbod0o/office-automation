@@ -1,8 +1,11 @@
-from sklearn.gaussian_process.kernels import Product
 from model.entity.Role import Role
-from model.entity.User import User
+from model.entity.bank import Bank
+from model.entity.payment import Payment
+from model.entity.transaction import Transaction
+from model.entity.user import User
 from model.entity.permission import Permission
 from model.entity import *
+from model.entity.section import Section
 from model.tools.decorators import exception_handling
 from model.services.service import Service
 
@@ -39,34 +42,25 @@ class Controller:
 
     @classmethod
     @exception_handling
-    def add_organization(cls, name, slogan, logo, duties, address, telephone, description="", head_id=None):
-        org = Organization(name, slogan, logo, duties, address, telephone, description)
-        return True, Service.save(org, Organization)
-
-    @classmethod
-    @exception_handling
-    def add_Department(cls, name, duties, location, phone_number, extension, access_lvl, description="", manager=None,
-                       deputy=None, parent_department=None):
-        dep = Department(name, duties, location, phone_number, extension, access_lvl, description, manager,
-                         deputy, parent_department)
+    def add_department(cls, name, department_num, logo, task, address, phone_number, description=""):
+        dep = Department(name, department_num, logo, task, address, phone_number, description=description)
         return True, Service.save(dep, Department)
 
-    # _____________________________________ALI________________________________________________#
     @classmethod
     @exception_handling
-    def add_Property(cls, property_code, group_code, property_name, property_description, label_code,
-                     count, property_price, delivery_date, section_code, personal_code_delivery
-                     , image, status):
-        prop = Property(property_code, group_code, property_name, property_description, label_code,
-                        count, property_price, delivery_date, section_code, personal_code_delivery,
-                        image, status)
-        return True, Service.save(prop, Property)
+    def add_section(cls, name, address, phone_number, internal_code, access_lvl, section_num, parent_section_num=None,
+                    description=None, department=None):
+        sec = Section(name, address, phone_number, internal_code, access_lvl, section_num, parent_section_num,
+                         description, department)
+        return True, Service.save(sec, Section)
 
-    @classmethod
-    @exception_handling
-    def add_product_group(cls, group_code, product_group_name, group_code_up, description=""):
-        prod = Product(group_code, product_group_name, group_code_up, description)
-        return True, Service.save(prod, ProductGroup)
+    # _____________________________________ALI________________________________________________#
+
+    # @classmethod
+    # @exception_handling
+    # def add_product_group(cls, group_code, product_group_name, group_code_up, description=""):
+    #     prod = Product(group_code, product_group_name, group_code_up, description)
+    #     return True, Service.save(prod, ProductGroup)
 
     # ____________________________________AMIRHOSSEIN______________________________________#
     class UserController:
@@ -117,10 +111,6 @@ class PermissionController:
         return Service.find_by(Permission, {"name": name})
 
 
-
-
-
-
 class RoleController:
 
     @classmethod
@@ -138,9 +128,6 @@ class RoleController:
     @exception_handling
     def find_role_by_name(cls, role_name):
         return Service.find_by(Role, {"role_name": role_name})
-
-
-
 
 
 class PersonController:
@@ -167,23 +154,21 @@ class PersonController:
             raise ValueError(f"شخصی با کد ملی {national_code} یافت نشد.")
         return result
 
-
-
     # ____________________________________MAHTAB______________________________________#
     @classmethod
     @exception_handling
     def add_bank(cls, name, account_number, branch_code):
-        ban = Bank( name, account_number, branch_code)
+        ban = Bank(name, account_number, branch_code)
         return True, Service.save(ban, Bank)
-    
+
     @classmethod
     @exception_handling
-    def add_transaction(cls,  payment_method, amount, date, tracking_code):
-        Transactn = Transaction(  payment_method, amount, date, tracking_code)
-        return True, Service.save(Transactn, Transaction)    
-   
-    @classmethod
-    @exception_handling
-    def add_payment(cls,  payment_method, amount, date, tracking_code):
-        Paymnt = Payment(  payment_method, amount, date, tracking_code)
-        return True, Service.save(Paymnt, Payment)
+    def add_transaction(cls, payment_method, amount, date, tracking_code):
+        Transactn = Transaction(payment_method, amount, date, tracking_code)
+        return True, Service.save(Transactn, Transaction)
+
+    # @classmethod
+    # @exception_handling
+    # def add_payment(cls, payment_method, amount, date, tracking_code):
+    #     Paymnt = Payment(payment_method, amount, date, tracking_code)
+    #     return True, Service.save(Paymnt, Payment)

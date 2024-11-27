@@ -15,7 +15,7 @@ class Section(Base):
     _access_level = Column("access_level", String(15), nullable=False)
     _parent_section_id = Column(Integer, ForeignKey("section_tbl.section_code"), nullable=True)
     _description = Column("section_description", String(100), nullable=False)
-    department_id = Column(Integer, ForeignKey("department_tbl._id"), nullable=True)
+    _department_id = Column(Integer, ForeignKey("department_tbl._id"), nullable=True)
     parent_section = relationship("Section", remote_side=[_id], lazy='joined')
     dep_id = relationship("Department", back_populates="sections")
 
@@ -29,9 +29,12 @@ class Section(Base):
         self._description = description
         self._access_level = access_lvl
         self._section_num = section_num
-        self._department_id = department._id if department is department else None
+        self._department_id = department._id
         self._parent_section_id = parent_section_num._id if parent_section_num else None
 
+    @property
+    def id(self):
+        return self._id
     @property
     def id(self):
         return self._id
