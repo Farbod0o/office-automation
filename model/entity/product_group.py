@@ -5,11 +5,11 @@ from model.entity.base import Base
 
 class ProductGroup(Base):
     __tablename__ = "product_group_tbl"
-    _id = Column("id", Integer, primary_key=True, nullable=False)
+    _id = Column("id", Integer, primary_key=True, nullable=False,autoincrement=True)
     _name = Column("name", String(30), nullable=False)
 
     def __init__(self, id, name):
-        self._id = id
+        self._id = None
         self._name = name
 
     @property

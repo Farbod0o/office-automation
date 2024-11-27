@@ -11,7 +11,7 @@ class Unit(Base):
     _description = Column("description", String(200), nullable=False)
 
     def __init__(self, id, name, amount, description):
-        self._id = id
+        self._id = None
         self._name = name
         self._amount = amount
         self._description = description
