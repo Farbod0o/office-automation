@@ -5,7 +5,7 @@ from model.tools.validator import pattern_validator
 import hashlib
 
 class User(Base):
-    tablename = "user_tbl"
+    __tablename__ = "user_tbl"
 
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _user_name = Column("user_name", String(30), nullable=False, unique=True)

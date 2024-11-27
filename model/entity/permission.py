@@ -3,7 +3,7 @@ from model.da.data_access import Base
 from model.tools.validator import pattern_validator
 
 class Permission(Base):
-    tablename = "permission_tbl"
+    __tablename__ = "permission_tbl"
 
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _name = Column(String(50), nullable=False, unique=True)
