@@ -8,7 +8,7 @@ class ProductGroup(Base):
     _id = Column("id", Integer, primary_key=True, nullable=False,autoincrement=True)
     _name = Column("name", String(30), nullable=False)
 
-    def __init__(self, id, name):
+    def __init__(self, name):
         self._id = None
         self._name = name
 

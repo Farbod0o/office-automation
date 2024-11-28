@@ -10,7 +10,7 @@ class Unit(Base):
     _amount = Column("amount", Integer, nullable=False)
     _description = Column("description", String(200), nullable=False)
 
-    def __init__(self, id, name, amount, description):
+    def __init__(self, name, amount, description):
         self._id = None
         self._name = name
         self._amount = amount

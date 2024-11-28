@@ -5,7 +5,7 @@ from model.entity.ticket import Ticket
 from model.entity.product_group import ProductGroup
 from model.entity.inventory_product import InventoryProduct
 from model.entity.Group_property import Group_property
-from model.entity.Product import Product
+from model.entity.product import Product
 from model.entity.Product_Property_Value import Product_Property_Value
 from model.entity.unit import Unit
 from model.entity.person import Person

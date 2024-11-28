@@ -12,7 +12,7 @@ class Product(Base):
     _description = Column("description", String(200), nullable=False)
     _image = Column("image", String(30), nullable=False)
 
-    def __init__(self, id, name, price, code, description, image):
+    def __init__(self, name, price, code, description, image):
         self._id = None
         self._name = name
         self._price = price

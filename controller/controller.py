@@ -1,16 +1,14 @@
-from model.entity.Role import Role
 from model.entity.bank import Bank
 from model.entity.payment import Payment
+from model.entity.refrence import Reference
 from model.entity.transaction import Transaction
 from model.entity.unit import Unit
-from model.entity.user import User
-from model.entity.permission import Permission
 from model.entity import *
 from model.entity.section import Section
 from model.tools.decorators import exception_handling
 from model.services.service import Service
 from model.entity.Group_property import Group_property
-from model.entity.Product import Product
+from model.entity.product import Product
 from model.entity.Product_Property_Value import Product_Property_Value
 from model.entity.inventory import Inventory
 from model.entity.inventory_transaction import InventoryTransaction
@@ -36,18 +34,6 @@ class Controller:
     # _____________________________________FARBOD_______________________________________#
     @classmethod
     @exception_handling
-    def add_ticket(cls, user, title, ticket_datetime, group, response_type):
-        ticket = Ticket(user, title, ticket_datetime, group, response_type)
-        return True, Service.save(ticket, Ticket)
-
-    @classmethod
-    @exception_handling
-    def add_Group(cls, name, parent_group=None):
-        gp = Group(name, parent_group)
-        return True, Service.save(gp, Group)
-
-    @classmethod
-    @exception_handling
     def add_department(cls, name, department_num, logo, task, address, phone_number, description=""):
         dep = Department(name, department_num, logo, task, address, phone_number, description=description)
         return True, Service.save(dep, Department)
@@ -60,6 +46,59 @@ class Controller:
                       description, department)
         return True, Service.save(sec, Section)
 
+    # ____________________________________MOBINA______________________________________#
+
+    @classmethod
+    @exception_handling
+    def find_by_reference_num(cls, reference_num):
+        return Service.find_by(Reference, Reference.reference_num == reference_num)
+
+    # todo: baraye peyda kardan name bar asas user aval bayad relation ha tarif shavad
+    # @classmethod
+    # @exception_handling
+    # def find_by_user(cls, session, user_id):
+    #     return session.query(cls).filter_by(user_id=user_id).all()
+
+    @classmethod
+    @exception_handling
+    def find_by_referral_date_time(cls, referral_date_time):
+        return Service.find_by(Reference, Reference._referral_date_time == referral_date_time)
+
+    @classmethod
+    @exception_handling
+    def find_by_expire_date_time(cls, expire_date_time):
+        return Service.find_by(Reference, Reference._expire_date_time == expire_date_time)
+
+    # todo: bayad service jadid tarif shavad
+    # @classmethod
+    # @exception_handling
+    # def find_by_paraph(cls, session, paraph):
+    #     return session.query(cls).filter(cls._paraph.like(f"%{paraph}%")).all()
+
+    @classmethod
+    @exception_handling
+    def find_by_priority(cls, priority):
+        return Service.find_by(Reference, Reference._priority == priority)
+
+    @classmethod
+    @exception_handling
+    def find_by_type(cls, type_):
+        return Service.find_by(Reference, Reference._type == type_)
+
+    @classmethod
+    @exception_handling
+    def find_by_status(cls, status):
+        return Service.find_by(Reference, Reference._status == status)
+
+    @classmethod
+    @exception_handling
+    def find_by_confirmation(cls, confirmation):
+        return Service.find_by(Reference, Reference._confirmation == confirmation)
+
+    @classmethod
+    @exception_handling
+    def find_by_receive_send(cls, receive_send):
+        return Service.find_by(Reference, Reference._receive_send == receive_send)
 
     # ____________________________________MAHTAB______________________________________#
     @classmethod
@@ -70,8 +109,8 @@ class Controller:
 
     @classmethod
     @exception_handling
-    def add_transaction(cls, payment_method, amount, tracking_code, payment):
-        trans = Transaction(payment_method, amount, tracking_code, payment)
+    def add_transaction(cls, payment_method, amount, tracking_code, payment,bank):
+        trans = Transaction(payment_method, amount, tracking_code, payment,bank)
         return True, Service.save(trans, Transaction)
 
     @classmethod
@@ -79,9 +118,6 @@ class Controller:
     def add_payment(cls, doc_number, description):
         pay = Payment(doc_number, description)
         return True, Service.save(pay, Payment)
-
-
-
 
     # _____________________________________ALI________________________________________________#
     @classmethod
@@ -114,10 +150,12 @@ class Controller:
     def find_by_title(cls, title):
         return Service.find_by(Group_property, Group_property.title == title)
 
+
+#todo: product == product
     @classmethod
     @exception_handling
-    def find_by_product(cls, Product):
-        return Service.find_by(Product, Product == Product)
+    def find_by_product(cls, product):
+        return Service.find_by(Product, product == product)
 
     # controller for product
     @classmethod
@@ -128,28 +166,33 @@ class Controller:
     @classmethod
     @exception_handling
     def find_by_price(cls, price):
-        return Service.find_by(Product.price == price)
+        return Service.find_by(Product, Product.price == price)
 
     @classmethod
     @exception_handling
     def find_by_code(cls, code):
         return Service.find_by(Product, Product.code == code)
 
+#todo:  Inventory == inventory
     @classmethod
     @exception_handling
     def find_by_inventory(cls, inventory):
         return Service.find_by(Inventory, Inventory == inventory)
 
+
+#todo: InventoryTransaction == inventory_transactions
     @classmethod
     @exception_handling
     def find_by_inventory_transactions(cls, inventory_transactions):
         return Service.find_by(InventoryTransaction, InventoryTransaction == inventory_transactions)
 
+#todo: Group_property == group_property
     @classmethod
     @exception_handling
     def find_by_group_property(cls, group_property):
         return Service.find_by(Group_property, Group_property == group_property)
 
+#todo: Product_Property_Value == product_property_value
     @classmethod
     @exception_handling
     def find_by_property_value(cls, product_property_value):
@@ -247,4 +290,3 @@ class PersonController:
         if not result:
             raise ValueError(f"شخصی با کد ملی {national_code} یافت نشد.")
         return result
-
