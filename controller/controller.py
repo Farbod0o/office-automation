@@ -60,6 +60,29 @@ class Controller:
                       description, department)
         return True, Service.save(sec, Section)
 
+
+    # ____________________________________MAHTAB______________________________________#
+    @classmethod
+    @exception_handling
+    def add_bank(cls, name, account_number, branch_code):
+        bnk = Bank(name, account_number, branch_code)
+        return True, Service.save(bnk, Bank)
+
+    @classmethod
+    @exception_handling
+    def add_transaction(cls, payment_method, amount, tracking_code, payment):
+        trans = Transaction(payment_method, amount, tracking_code, payment)
+        return True, Service.save(trans, Transaction)
+
+    @classmethod
+    @exception_handling
+    def add_payment(cls, doc_number, description):
+        pay = Payment(doc_number, description)
+        return True, Service.save(pay, Payment)
+
+
+
+
     # _____________________________________ALI________________________________________________#
     @classmethod
     @exception_handling
@@ -225,21 +248,3 @@ class PersonController:
             raise ValueError(f"شخصی با کد ملی {national_code} یافت نشد.")
         return result
 
-    # ____________________________________MAHTAB______________________________________#
-    @classmethod
-    @exception_handling
-    def add_bank(cls, name, account_number, branch_code):
-        bnk = Bank(name, account_number, branch_code)
-        return True, Service.save(bnk, Bank)
-
-    @classmethod
-    @exception_handling
-    def add_transaction(cls, payment_method, amount, tracking_code, payment):
-        trans = Transaction(payment_method, amount, tracking_code, payment)
-        return True, Service.save(trans, Transaction)
-
-    @classmethod
-    @exception_handling
-    def add_payment(cls, doc_number, description):
-        pay = Payment(doc_number, description)
-        return True, Service.save(pay, Payment)
