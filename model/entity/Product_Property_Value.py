@@ -12,7 +12,7 @@ class Product_Property_Value(Base):
     _description = Column("description", String(200), nullable=False)
     _material = Column("material", String(30), nullable=False)
 
-    def __init__(self, id, color, size, weight, description, material):
+    def __init__(self, color, size, weight, description, material):
         self._id = None
         self._color = color
         self._size = size

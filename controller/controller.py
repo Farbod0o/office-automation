@@ -109,8 +109,8 @@ class Controller:
 
     @classmethod
     @exception_handling
-    def add_transaction(cls, payment_method, amount, tracking_code, payment,bank):
-        trans = Transaction(payment_method, amount, tracking_code, payment,bank)
+    def add_transaction(cls, payment_method, amount, tracking_code, payment, bank):
+        trans = Transaction(payment_method, amount, tracking_code, payment, bank)
         return True, Service.save(trans, Transaction)
 
     @classmethod
@@ -150,8 +150,7 @@ class Controller:
     def find_by_title(cls, title):
         return Service.find_by(Group_property, Group_property.title == title)
 
-
-#todo: product == product
+    # todo: product == product
     @classmethod
     @exception_handling
     def find_by_product(cls, product):
@@ -173,26 +172,25 @@ class Controller:
     def find_by_code(cls, code):
         return Service.find_by(Product, Product.code == code)
 
-#todo:  Inventory == inventory
+    # todo:  Inventory == inventory
     @classmethod
     @exception_handling
     def find_by_inventory(cls, inventory):
         return Service.find_by(Inventory, Inventory == inventory)
 
-
-#todo: InventoryTransaction == inventory_transactions
+    # todo: InventoryTransaction == inventory_transactions
     @classmethod
     @exception_handling
     def find_by_inventory_transactions(cls, inventory_transactions):
         return Service.find_by(InventoryTransaction, InventoryTransaction == inventory_transactions)
 
-#todo: Group_property == group_property
+    # todo: Group_property == group_property
     @classmethod
     @exception_handling
     def find_by_group_property(cls, group_property):
         return Service.find_by(Group_property, Group_property == group_property)
 
-#todo: Product_Property_Value == product_property_value
+    # todo: Product_Property_Value == product_property_value
     @classmethod
     @exception_handling
     def find_by_property_value(cls, product_property_value):
@@ -213,16 +211,19 @@ class Controller:
         def find_user_by_id(cls, user_id):
             return Service.find_by_id(User, user_id)
 
+        # todo: shart {"user_name": user_name}
         @classmethod
         @exception_handling
         def find_user_by_user_name(cls, user_name):
             return Service.find_by(User, {"user_name": user_name})
 
+        # todo: shart {"role_id": role_id}
         @classmethod
         @exception_handling
         def find_users_by_role(cls, role_id):
             return Service.find_by(User, {"role_id": role_id})
 
+        # todo: shart {"person_id": person_id}
         @classmethod
         @exception_handling
         def find_users_by_person(cls, person_id):
@@ -242,6 +243,7 @@ class PermissionController:
     def find_permission_by_id(cls, permission_id):
         return Service.find_by_id(Permission, permission_id)
 
+    # todo: shart {"name": name}
     @classmethod
     @exception_handling
     def find_permission_by_name(cls, name):
@@ -261,6 +263,7 @@ class RoleController:
     def find_role_by_id(cls, role_id):
         return Service.find_by_id(Role, role_id)
 
+    # todo: shart {"role_name": role_name}
     @classmethod
     @exception_handling
     def find_role_by_name(cls, role_name):
