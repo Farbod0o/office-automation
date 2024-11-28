@@ -2,12 +2,18 @@ from model.entity.Role import Role
 from model.entity.bank import Bank
 from model.entity.payment import Payment
 from model.entity.transaction import Transaction
+from model.entity.unit import Unit
 from model.entity.user import User
 from model.entity.permission import Permission
 from model.entity import *
 from model.entity.section import Section
 from model.tools.decorators import exception_handling
 from model.services.service import Service
+from model.entity.Group_property import Group_property
+from model.entity.Product import Product
+from model.entity.Product_Property_Value import Product_Property_Value
+from model.entity.inventory import Inventory
+from model.entity.inventory_transaction import InventoryTransaction
 
 
 class Controller:
@@ -51,18 +57,82 @@ class Controller:
     def add_section(cls, name, address, phone_number, internal_code, access_lvl, section_num, parent_section_num=None,
                     description=None, department=None):
         sec = Section(name, address, phone_number, internal_code, access_lvl, section_num, parent_section_num,
-                         description, department)
+                      description, department)
         return True, Service.save(sec, Section)
 
     # _____________________________________ALI________________________________________________#
+    @classmethod
+    @exception_handling
+    def add_product_group(cls, title):
+        pg = ProductGroup(title)
+        return True, Service.save(pg, ProductGroup)
 
-    # @classmethod
-    # @exception_handling
-    # def add_product_group(cls, group_code, product_group_name, group_code_up, description=""):
-    #     prod = Product(group_code, product_group_name, group_code_up, description)
-    #     return True, Service.save(prod, ProductGroup)
+    @classmethod
+    @exception_handling
+    def add_unit(cls, name, amount, description):
+        un = Unit(name, amount, description)
+        return True, Service.save(un, Unit)
 
-    # ____________________________________AMIRHOSSEIN______________________________________#
+    @classmethod
+    @exception_handling
+    def add_product(cls, name, price, code, description, image):
+        pro = Product(name, price, code, description, image)
+        return True, Service.save(pro, Product)
+
+    @classmethod
+    @exception_handling
+    def add_product_property_value(cls, color, size, weight, description, material):
+        pro_v = Product_Property_Value(color, size, weight, description, material)
+        return True, Service.save(pro_v, Product_Property_Value)
+
+    # controller for group property:
+    @classmethod
+    @exception_handling
+    def find_by_title(cls, title):
+        return Service.find_by(Group_property, Group_property.title == title)
+
+    @classmethod
+    @exception_handling
+    def find_by_product(cls, Product):
+        return Service.find_by(Product, Product == Product)
+
+    # controller for product
+    @classmethod
+    @exception_handling
+    def find_by_name(cls,name):
+        return Service.find_by(Product, Product.name == name)
+
+    @classmethod
+    @exception_handling
+    def find_by_price(cls,price):
+        return Service.find_by(Product.price == price)
+
+    @classmethod
+    @exception_handling
+    def find_by_code(cls, code):
+        return Service.find_by(Product, Product.code == code)
+
+    @classmethod
+    @exception_handling
+    def find_by_inventory(cls,inventory):
+        return Service.find_by(Inventory, Inventory == inventory)
+
+    @classmethod
+    @exception_handling
+    def find_by_inventory_transactions(cls,inventory_transactions):
+        return Service.find_by(InventoryTransaction, InventoryTransaction == inventory_transactions)
+
+    @classmethod
+    @exception_handling
+    def find_by_group_property(cls, group_property):
+        return Service.find_by(Group_property, Group_property == group_property)
+
+    @classmethod
+    @exception_handling
+    def find_by_property_value(cls,product_property_value):
+        return Service.find_by(Product_Property_Value, Product_Property_Value == product_property_value)
+
+        # ____________________________________AMIRHOSSEIN______________________________________#
     class UserController:
 
         @classmethod
