@@ -99,12 +99,12 @@ class Controller:
     # controller for product
     @classmethod
     @exception_handling
-    def find_by_name(cls,name):
+    def find_by_name(cls, name):
         return Service.find_by(Product, Product.name == name)
 
     @classmethod
     @exception_handling
-    def find_by_price(cls,price):
+    def find_by_price(cls, price):
         return Service.find_by(Product.price == price)
 
     @classmethod
@@ -114,12 +114,12 @@ class Controller:
 
     @classmethod
     @exception_handling
-    def find_by_inventory(cls,inventory):
+    def find_by_inventory(cls, inventory):
         return Service.find_by(Inventory, Inventory == inventory)
 
     @classmethod
     @exception_handling
-    def find_by_inventory_transactions(cls,inventory_transactions):
+    def find_by_inventory_transactions(cls, inventory_transactions):
         return Service.find_by(InventoryTransaction, InventoryTransaction == inventory_transactions)
 
     @classmethod
@@ -129,10 +129,11 @@ class Controller:
 
     @classmethod
     @exception_handling
-    def find_by_property_value(cls,product_property_value):
+    def find_by_property_value(cls, product_property_value):
         return Service.find_by(Product_Property_Value, Product_Property_Value == product_property_value)
 
         # ____________________________________AMIRHOSSEIN______________________________________#
+
     class UserController:
 
         @classmethod
@@ -228,17 +229,17 @@ class PersonController:
     @classmethod
     @exception_handling
     def add_bank(cls, name, account_number, branch_code):
-        ban = Bank(name, account_number, branch_code)
-        return True, Service.save(ban, Bank)
+        bnk = Bank(name, account_number, branch_code)
+        return True, Service.save(bnk, Bank)
 
     @classmethod
     @exception_handling
-    def add_transaction(cls, payment_method, amount, date, tracking_code):
-        Transactn = Transaction(payment_method, amount, date, tracking_code)
-        return True, Service.save(Transactn, Transaction)
+    def add_transaction(cls, payment_method, amount, tracking_code, payment):
+        trans = Transaction(payment_method, amount, tracking_code, payment)
+        return True, Service.save(trans, Transaction)
 
-    # @classmethod
-    # @exception_handling
-    # def add_payment(cls, payment_method, amount, date, tracking_code):
-    #     Paymnt = Payment(payment_method, amount, date, tracking_code)
-    #     return True, Service.save(Paymnt, Payment)
+    @classmethod
+    @exception_handling
+    def add_payment(cls, doc_number, description):
+        pay = Payment(doc_number, description)
+        return True, Service.save(pay, Payment)

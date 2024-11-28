@@ -1,6 +1,6 @@
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
-from sqlalchemy import (Column, String, Integer, ForeignKey)
+from sqlalchemy import (Column, String, Integer, DateTime, Enum, Double, DATETIME, func, ForeignKey)
 from sqlalchemy.orm import relationship
 
 
@@ -8,19 +8,23 @@ class Transaction(Base):
     __tablename__ = "transaction_tbl"
 
     _id = Column("transaction_code", Integer, primary_key=True, autoincrement=True)
-    #_payment_method =
-    # _amount =
-    # _date =
-    _tracking_code =Column("tracking_code", Integer, primary_key=True, autoincrement=True)
+    _payment_method = Column(Enum("PaymentMethod", "PaymentMethod2"), default="PaymentMethod", nullable=False, )
+    _amount = Column(Integer, nullable=False)
+    _date = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    _tracking_code = Column("tracking_code", Integer, primary_key=True, autoincrement=True)
+    _payment_id = Column(ForeignKey("payment_tbl.payment_id"), nullable=False)
+    _bank_id = Column(ForeignKey("bank_tbl.bank_id"), nullable=False)
 
+    bnk = relationship("Bank", back_populates="trans")
+    payment = relationship("Payment", back_populates="transaction")
 
-    def __init__(self, payment_method, amount, date, tracking_code):
+    def __init__(self, payment_method, amount, tracking_code, payment, bank):
         self._id = None
         self._payment_method = payment_method
         self._amount = amount
-        self._date = date
         self._trackingcode = tracking_code
-
+        self._payment_id = payment._id
+        self._bank_id = bank._id
 
     @property
     def id(self):
@@ -30,32 +34,6 @@ class Transaction(Base):
     def id(self, value):
         self._id = value
 
-    # @property
-    # def _payment_method(self):
-    #     return self._payment_method
-    #
-    # @_payment_method.setter
-    # @pattern_validator(r"^.{2,30}$", "نام دپارتمان معتبر نیست!")
-    # def _payment_method(self, _payment_method):
-    #     self._payment_method = _payment_method
-    #
-    # @property
-    # def _amount(self):
-    #     return self._amount
-    #
-    # @_amount.setter
-    # @pattern_validator(r"^.{2,100}$", "شرح وظایف دپارتمان معتبر نیست!")
-    # def _amount(self, value):
-    #     self._amount = value
-    #
-    # @property
-    # def _date(self):
-    #     return self._date
-    #
-    # @_date.setter
-    # def _date(self, value):
-    #     self._date = value
-
     @property
     def _tracking_code(self):
         return self._tracking_code
@@ -64,4 +42,3 @@ class Transaction(Base):
     @pattern_validator(r"^\d{3}$", "شماره داخلی دپارتمان معتبر نیست!")
     def _tracking_code(self, value):
         self._tracking_code = value
-
