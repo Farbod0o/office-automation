@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, relationship
+from sqlalchemy import Column, Integer, String
 from model.entity.base import Base
 from model.tools.validator import pattern_validator
 
@@ -86,3 +86,8 @@ class Product_Property_Value(Base):
 
         else:
             raise ValueError("متریال معتبر نیست")
+
+
+
+test = Product_Property_Value("wswsw","hfuwhfwuwfi","hfkuHWKEF","EHFKwhfk","wefkwhfi")
+print(test)

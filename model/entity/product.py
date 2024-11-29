@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, relationship
+from sqlalchemy import Column, Integer, String
 from model.entity.base import Base
 from model.tools.validator import pattern_validator
 

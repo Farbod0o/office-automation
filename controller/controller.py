@@ -154,7 +154,7 @@ class Controller:
     @classmethod
     @exception_handling
     def find_by_product(cls, product):
-        return Service.find_by(Product, product == product)
+        return Service.find_by(Product, Product.name == product)
 
     # controller for product
     @classmethod
@@ -176,25 +176,27 @@ class Controller:
     @classmethod
     @exception_handling
     def find_by_inventory(cls, inventory):
-        return Service.find_by(Inventory, Inventory == inventory)
+        return Service.find_by(Inventory, Inventory.inventory == inventory)
 
     # todo: InventoryTransaction == inventory_transactions
     @classmethod
     @exception_handling
     def find_by_inventory_transactions(cls, inventory_transactions):
-        return Service.find_by(InventoryTransaction, InventoryTransaction == inventory_transactions)
+        return Service.find_by(InventoryTransaction,InventoryTransaction.inventory_transactions ==
+                               inventory_transactions)
 
     # todo: Group_property == group_property
     @classmethod
     @exception_handling
     def find_by_group_property(cls, group_property):
-        return Service.find_by(Group_property, Group_property == group_property)
+        return Service.find_by(Group_property, Group_property.group_prpperty == group_property)
 
     # todo: Product_Property_Value == product_property_value
     @classmethod
     @exception_handling
     def find_by_property_value(cls, product_property_value):
-        return Service.find_by(Product_Property_Value, Product_Property_Value == product_property_value)
+        return Service.find_by(Product_Property_Value, Product_Property_Value.product_property_value
+                               == product_property_value)
 
         # ____________________________________AMIRHOSSEIN______________________________________#
 
