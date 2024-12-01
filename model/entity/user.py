@@ -14,7 +14,7 @@ class User(Base):
     _role_id = Column("role_id", Integer, ForeignKey("role_tbl.id"), nullable=False)
     _person_id = Column("person_id", Integer, ForeignKey("person_tbl.id"), nullable=False)
 
-    role = relationship("Role", back_populates="users")
+    roles = relationship("Role", secondary="user_role_tbl", back_populates="users")
     person = relationship("Person", back_populates="user")
 
     def init(self, user_name, password, email, role_id, person_id):
