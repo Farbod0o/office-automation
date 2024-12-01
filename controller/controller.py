@@ -297,7 +297,6 @@ class PersonController:
             raise ValueError(f"شخصی با کد ملی {national_code} یافت نشد.")
         return result
 
-
 class MassageController:
 
     @classmethod
