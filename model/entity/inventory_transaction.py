@@ -31,6 +31,7 @@ class InventoryTransaction(Base):
 
     @count.setter
     def count(self, count):
+        self._count = count
 
 
     @property

@@ -10,6 +10,7 @@ class Bank(Base):
     _name = Column("bank_name", String(30), nullable=False, unique=True)
     _account_number = Column("account_number", String(30), nullable=False)
     _branch_code = Column("branch_code", Integer, nullable=False)
+    trans = relationship("Transaction", back_populates="bnk")
 
 
     def __init__(self, name, account_number, branch_code):

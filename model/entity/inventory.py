@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 class Inventory(Base):
     __tablename__ = "inventory"
     _id = Column(Integer, primary_key=True, autoincrement=True)
-    _title = Column(String)
+    _title = Column(String(40))
     _address = Column(String(30))
     _phone = Column(String(11))
 

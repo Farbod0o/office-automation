@@ -1,34 +1,33 @@
-from flask import Flask, render_template, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO, emit
-from datetime import datetime, timedelta
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+import os
 from controller.controller import Controller
+app = Flask(__name__, template_folder='view/templates',static_folder='view/statics')
+app.config['UPLOAD_FOLDER'] = 'uploads'
 
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
-
-
+# Ensure the upload folder exists
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 @app.route('/')
-def index():
+def home():
     return render_template('index.html')
 
-# @app.post("/add-organization")
-# async def add_organization(
-#     name: str = Form(...),
-#     slogan: str = Form(...),
-#     logo: str = Form(...),
-#     duties: str = Form(...),
-#     address: str = Form(...),
-#     telephone: str = Form(...),
-#     description: str = Form(""),
-#     head_id: int = Form(None)
-# ):
-#     success, message = Controller.add_organization(name, slogan, logo, duties, address, telephone, description, head_id)
-#     if success:
-#         return {"message": "سازمان با موفقیت اضافه شد!"}
-#     else:
-#         return {"error": f"{message}"}
+@app.route('/submit-dep', methods=['POST'])
+def submit_dep_form():
+    print("hi")
+    name = request.form.get('name')
+    phone = request.form.get('phone')
+    department_num = request.form.get('department-num')
+    short_description = request.form.get('short-description')
+    additional_description = request.form.get('additional-description')
+
+    photo = request.files['photo']
+    if photo:
+        photo_path = os.path.join(app.config['UPLOAD_FOLDER'], photo.filename)
+        photo.save(photo_path)
+    status,dep = Controller.add_department(name,department_num,photo_path,short_description,"address",phone,additional_description)
+    print(dep)
+
+    return jsonify(success=True)
 
 if __name__ == '__main__':
-    socketio.run(app, host="0.0.0.0", port=5001, debug=True)
+    app.run(debug=True)

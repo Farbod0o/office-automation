@@ -9,7 +9,7 @@ class Role(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     role_name = Column(String(50), nullable=False, unique=True)
 
-    users = relationship("User", secondary="user_role_tbl", back_populates="roles")
+    # users = relationship("User", secondary="user_role_tbl", back_populates="roles")
 
     def __init__(self, role_name):
         self.id = None
