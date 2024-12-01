@@ -21,16 +21,16 @@ class Section(Base):
 
     def __init__(self, name, address, phone_number, internal_code, access_lvl, section_num, parent_section_num=None,
                  description=None,department=None):
-        self._id = None
-        self._name = name
-        self._address = address
-        self._phone_number = phone_number
-        self._internal_code = internal_code
-        self._description = description
-        self._access_level = access_lvl
-        self._section_num = section_num
-        self._department_id = department._id
-        self._parent_section_id = parent_section_num._id if parent_section_num else None
+        self.id = None
+        self.name = name
+        self.address = address
+        self.phone_number = phone_number
+        self.internal_code = internal_code
+        self.description = description
+        self.access_level = access_lvl
+        self.section_num = section_num
+        self.department_id = department._id
+        self.parent_section_id = parent_section_num._id if parent_section_num else None
 
     @property
     def id(self):

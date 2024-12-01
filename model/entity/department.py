@@ -18,19 +18,23 @@ class Department(Base):
     sections = relationship("Section", back_populates="dep_id")
 
     def __init__(self, name, department_num, logo, task, address, phone_number, description=""):
-        self._id = None
-        self._name = name
-        self._department_num = department_num
-        self._logo = logo
-        self._task = task
-        self._address = address
-        self._phone_number = phone_number
-        self._description = description
+        self.id = None
+        self.name = name
+        self.department_num = department_num
+        self.logo = logo
+        self.task = task
+        self.address = address
+        self.phone_number = phone_number
+        self.description = description
 
 
     @property
     def id(self):
         return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     @property
     def name(self):

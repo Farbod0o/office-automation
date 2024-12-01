@@ -1,5 +1,6 @@
 from model.entity.person import Person
 from model.entity.department import Department
+from model.entity.section import Section
 from model.entity.group import Group
 from model.entity.ticket import Ticket
 from model.entity.product_group import ProductGroup
@@ -13,5 +14,5 @@ from model.entity.Role import Role
 from model.entity.user import User
 from model.entity.permission import Permission
 
-__all__ = ["Person", "Department","Group","Ticket","ProductGroup","Product","Product_Property_Value","unit"
+__all__ = ["Person", "Department","Section","Group","Ticket","ProductGroup","Product","Product_Property_Value","unit"
            ,"Role","User","Permission"]

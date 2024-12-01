@@ -24,10 +24,12 @@ def submit_dep_form():
     if photo:
         photo_path = os.path.join(app.config['UPLOAD_FOLDER'], photo.filename)
         photo.save(photo_path)
-    status,dep = Controller.add_department(name,department_num,photo_path,short_description,"address",phone,additional_description)
-    print(dep)
+    status,dep = Controller.add_department(name,1,photo_path,short_description,"address",phone,additional_description)
+    if status:
+        return jsonify({"status": status, })
+    else:
+        return jsonify({"status": status,"message":dep})
 
-    return jsonify(success=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

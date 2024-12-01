@@ -11,7 +11,7 @@ person = Person(
     family="Ahmadi",
     national_id="1234567890",
     birth_date="1990-01-01",
-    phone="09121234567",
+    phone="33",
     address="Tehran, Iran",
     post_code="1234567890"
 )
