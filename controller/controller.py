@@ -174,30 +174,32 @@ class Controller:
         return Service.find_by(Product, Product.code == code)
 
     # todo:  Inventory == inventory
+    #todo: Done
     @classmethod
     @exception_handling
     def find_by_inventory(cls, inventory):
-        return Service.find_by(Inventory, Inventory.inventory == inventory)
+        return Service.find_by(Inventory, Inventory.id == inventory)
 
     # todo: InventoryTransaction == inventory_transactions
+    #todo: Done
     @classmethod
     @exception_handling
     def find_by_inventory_transactions(cls, inventory_transactions):
-        return Service.find_by(InventoryTransaction,InventoryTransaction.inventory_transactions ==
-                               inventory_transactions)
+        return Service.find_by(InventoryTransaction,InventoryTransaction.id == inventory_transactions)
 
     # todo: Group_property == group_property
+    #todo: Done
     @classmethod
     @exception_handling
     def find_by_group_property(cls, group_property):
-        return Service.find_by(Group_property, Group_property.group_prpperty == group_property)
+        return Service.find_by(Group_property, Group_property.id == group_property)
 
     # todo: Product_Property_Value == product_property_value
+    # todo: Done
     @classmethod
     @exception_handling
     def find_by_property_value(cls, product_property_value):
-        return Service.find_by(Product_Property_Value, Product_Property_Value.product_property_value
-                               == product_property_value)
+        return Service.find_by(Product_Property_Value,Product_Property_Value.id == product_property_value)
 
         # ____________________________________AMIRHOSSEIN______________________________________#
 
