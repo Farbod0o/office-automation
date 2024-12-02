@@ -3,8 +3,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import os
-from controller.controller import Controller
-
+from controller.controller import *
 app = FastAPI()
 
 templates = Jinja2Templates(directory="view/templates")

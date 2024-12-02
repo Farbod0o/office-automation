@@ -5,13 +5,19 @@ from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME, Enum, Flo
 from sqlalchemy.orm import relationship
 
 
+class Status(Enum):
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    PENDING = "pending"
+
+
 class Delivery(Base):
     __tablename__ = "delivery_tbl"
     _id = Column("_id", Integer, primary_key=True, autoincrement=True)
     _address = Column("delivery_address", String(50))
     _tracking_number = Column("delivery_tracking_number", String(30))
     _cost = Column("delivery_cost", Float, nullable=False)
-    _status = Column("delivery_status", Enum("active", "inactive", "pending"), nullable=False)
+    _status = Column(Enum(Status), nullable=False)
     _shipped_date = Column(DATETIME)
     _delivery_time = Column(DATETIME)
 
@@ -53,4 +59,3 @@ class Delivery(Base):
     @delivery_time.setter
     def delivery_time(self, delivery_time):
         self._delivery_time = delivery_time
-

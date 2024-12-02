@@ -1,7 +1,8 @@
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
-from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME, Enum)
+from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME)
 from sqlalchemy.orm import relationship
+from model.entity.delivery import Status, Enum
 
 
 class InventoryTransaction(Base):
@@ -9,9 +10,9 @@ class InventoryTransaction(Base):
     _id = Column("_id", Integer, primary_key=True, autoincrement=True)
     _count = Column("count", Integer, default=0)
     _date_time = Column(DATETIME)
-    _status = Column("status", Enum("active", "inactive", "pending"))   # نیاز به بررسی
+    _status = Column("status", Enum(Status))
 
-    def __init__(self, count, date_time, status):
+    def __init__(self, count, date_time, status=Status.PENDING):
         self._id = None
         self._count = count
         self._date_time = date_time
@@ -34,6 +35,14 @@ class InventoryTransaction(Base):
         self._count = count
 
     @property
+    def date_time(self):
+        return self._date_time
+
+    @date_time.setter
+    def date_time(self, date_time):
+        self._date_time = date_time
+
+    @property
     def status(self):
         return self._status
 
@@ -41,10 +50,6 @@ class InventoryTransaction(Base):
     def status(self, status):
         self._status = status
 
-    @property
-    def date_time(self):
-        return self._date_time
 
-    @date_time.setter
-    def date_time(self, date_time):
-        self._date_time = date_time
+inventory_transaction = InventoryTransaction(1, "2000-01-01 00:00:00", status=Status.PENDING)
+print(inventory_transaction)
