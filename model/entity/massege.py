@@ -1,4 +1,5 @@
-from sqlalchemy import Integer, Column, String, ForeignKey, DateTime, relationship
+from sqlalchemy import Integer, Column, String, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
 
@@ -11,9 +12,9 @@ class Massage(Base):
     _title = Column("title", String(250), nullable=False)
     _membername = Column("membername", String(30), nullable=False)
 
-    system_user = relationship("System_User", back_populates="massages")
-    person = relationship("Person", back_populates="massages")
-    property = relationship("Property", back_populates="massages")
+    # system_user = relationship("System_User", back_populates="massages")
+    # person = relationship("Person", back_populates="massages")
+    # property = relationship("Property", back_populates="massages")
 
     def __init__(self, text, date_time, title, membername):
         self._id = None

@@ -5,11 +5,6 @@ from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME, Enum, Flo
 from sqlalchemy.orm import relationship
 
 
-class Status(Enum):
-    ACTIVE = "active"
-    INACTIVE = "inactive"
-    PENDING = "pending"
-
 
 class Delivery(Base):
     __tablename__ = "delivery_tbl"
@@ -17,7 +12,7 @@ class Delivery(Base):
     _address = Column("delivery_address", String(50))
     _tracking_number = Column("delivery_tracking_number", String(30))
     _cost = Column("delivery_cost", Float, nullable=False)
-    _status = Column(Enum(Status), nullable=False)
+    _status = Column(Enum("official","informal","urgent"), nullable=False)
     _shipped_date = Column(DATETIME)
     _delivery_time = Column(DATETIME)
 
