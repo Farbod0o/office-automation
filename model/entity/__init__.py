@@ -13,6 +13,11 @@ from model.entity.person import Person
 from model.entity.Role import Role
 from model.entity.user import User
 from model.entity.permission import Permission
+from model.entity.department import Department
+from model.entity.inventory import Inventory
+from model.entity.inventory_product import InventoryProduct
+from model.entity.delivery import Delivery
+from model.entity.inventory_transaction import InventoryTransaction
 
 __all__ = ["Person", "Department","Section","Group","Ticket","ProductGroup","Product","Product_Property_Value","unit"
-           ,"Role","User","Permission"]
+           ,"Role","User","Permission", "Inventory","InventoryProduct","Delivery","InventoryTransaction"]
