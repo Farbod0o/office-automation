@@ -17,7 +17,7 @@ class Delivery(Base):
     _address = Column("delivery_address", String(50))
     _tracking_number = Column("delivery_tracking_number", String(30))
     _cost = Column("delivery_cost", Float, nullable=False)
-    _status = Column(Enum(Status), nullable=False)
+    _status = Column("delivery_status", Enum("active", "inactive", "pending"), nullable=False)
     _shipped_date = Column(DATETIME)
     _delivery_time = Column(DATETIME)
 
@@ -59,3 +59,4 @@ class Delivery(Base):
     @delivery_time.setter
     def delivery_time(self, delivery_time):
         self._delivery_time = delivery_time
+
