@@ -1,19 +1,25 @@
+
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
-from sqlalchemy import (Column, String, Integer, ForeignKey, DateTime)
+from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME, Enum, Float, Double)
 from sqlalchemy.orm import relationship
 
 
+class Status(Enum):
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    PENDING = "pending"
+
+
 class Delivery(Base):
-    __tablename__ = "delivery"
-    _id = Column(Integer, primary_key=True, autoincrement=True)
-    _address = Column(String(50))
-    _tracking_number = Column(String)
-    # _cost =
-    # _status =
-    # _delivery_method =
-    _shipped_date = Column(DateTime)
-    _delivery_time = Column(DateTime)
+    __tablename__ = "delivery_tbl"
+    _id = Column("_id", Integer, primary_key=True, autoincrement=True)
+    _address = Column("delivery_address", String(50))
+    _tracking_number = Column("delivery_tracking_number", String(30))
+    _cost = Column("delivery_cost", Float, nullable=False)
+    _status = Column(Enum(Status), nullable=False)
+    _shipped_date = Column(DATETIME)
+    _delivery_time = Column(DATETIME)
 
     def __init__(self, address, tracking_number, shipped_date, delivery_time):
         self._address = address
@@ -34,6 +40,7 @@ class Delivery(Base):
         return self._tracking_number
 
     @tracking_number.setter
+    @pattern_validator(r"^\d+$", "شماره پیگیری معتبر نمی باشد")
     def tracking_number(self, tracking_number):
         self._tracking_number = tracking_number
 

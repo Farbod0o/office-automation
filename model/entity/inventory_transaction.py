@@ -1,16 +1,16 @@
 from datetime import datetime
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
-from sqlalchemy import (Column, String, Integer, ForeignKey, DateTime)
+from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME)
 from sqlalchemy.orm import relationship
 
 
 class InventoryTransaction(Base):
-    __tablename__ = "inventory_transaction"
-    _id = Column(Integer, primary_key=True, autoincrement=True)
-    _count = Column(Integer, default=0)
-    _date_time = Column(DateTime)
-    # _status =
+    __tablename__ = "inventory_transaction_tbl"
+    _id = Column("_id", Integer, primary_key=True, autoincrement=True)
+    _count = Column("inventory_transaction_count", Integer, default=0)
+    _date_time = Column(DATETIME)
+    _status = Column(Enum)
 
     def __init__(self, count, date_time):
         self._id = None
