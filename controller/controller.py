@@ -1,6 +1,7 @@
 from model.entity.bank import Bank
 from model.entity.payment import Payment
 from model.entity.refrence import Reference
+from model.entity.ticket_group import TicketGroup
 from model.entity.transaction import Transaction
 from model.entity.unit import Unit
 from model.entity import *
@@ -12,7 +13,7 @@ from model.entity.product import Product
 from model.entity.Product_Property_Value import Product_Property_Value
 from model.entity.inventory import Inventory
 from model.entity.inventory_transaction import InventoryTransaction
-
+from model.entity.massege import Massage
 
 class Controller:
 
@@ -173,30 +174,32 @@ class Controller:
         return Service.find_by(Product, Product.code == code)
 
     # todo:  Inventory == inventory
+    #todo: Done
     @classmethod
     @exception_handling
     def find_by_inventory(cls, inventory):
-        return Service.find_by(Inventory, Inventory.inventory == inventory)
+        return Service.find_by(Inventory, Inventory.id == inventory)
 
     # todo: InventoryTransaction == inventory_transactions
+    #todo: Done
     @classmethod
     @exception_handling
     def find_by_inventory_transactions(cls, inventory_transactions):
-        return Service.find_by(InventoryTransaction,InventoryTransaction.inventory_transactions ==
-                               inventory_transactions)
+        return Service.find_by(InventoryTransaction,InventoryTransaction.id == inventory_transactions)
 
     # todo: Group_property == group_property
+    #todo: Done
     @classmethod
     @exception_handling
     def find_by_group_property(cls, group_property):
-        return Service.find_by(Group_property, Group_property.group_prpperty == group_property)
+        return Service.find_by(Group_property, Group_property.id == group_property)
 
     # todo: Product_Property_Value == product_property_value
+    # todo: Done
     @classmethod
     @exception_handling
     def find_by_property_value(cls, product_property_value):
-        return Service.find_by(Product_Property_Value, Product_Property_Value.product_property_value
-                               == product_property_value)
+        return Service.find_by(Product_Property_Value,Product_Property_Value.id == product_property_value)
 
         # ____________________________________AMIRHOSSEIN______________________________________#
 
@@ -295,3 +298,77 @@ class PersonController:
         if not result:
             raise ValueError(f"شخصی با کد ملی {national_code} یافت نشد.")
         return result
+
+class MassageController:
+
+    @classmethod
+    @exception_handling
+    def add_massage (cls, title, date_time, membername, text):
+        massage = Massage (title, date_time, membername, text)
+        return True , Service.save(massage, Massage)
+
+    @classmethod
+    @exception_handling
+    def find_massage_by_title(cls,title):
+        return Service.find_by(Massage, {"title": title})
+
+    @classmethod
+    @exception_handling
+    def find_massage_by_date_time(cls, date_time):
+        return Service.find_by(Massage, {"date_time": date_time})
+
+    @classmethod
+    @exception_handling
+    def find_massage_by_ticket(cls, ticket):
+        return Service.find_by(Massage, {"ticket": ticket})
+
+    @classmethod
+    @exception_handling
+    def find_massage_by_text(cls, text):
+        return Service.find_by(Massage, {"text": text})
+
+    @classmethod
+    @exception_handling
+    def find_massage_by_user(cls, user):
+        return Service.find_by(Massage,{"user": user})
+
+class TicketController:
+
+    @classmethod
+    @exception_handling
+    def add_ticket (cls, datetime,response_type, title, text, massage):
+        ticket = Ticket (datetime,response_type, title, text, massage)
+        return True, Service.save(ticket, Ticket)
+
+    @classmethod
+    @exception_handling
+    def find_ticket_by_datetime (cls, datetime):
+        return Service.find_by(Ticket, {"datetime": datetime})
+
+    @classmethod
+    @exception_handling
+    def find_ticket_by_response_type(cls,response_type):
+        return Service.find_by(Ticket,{"response_type": response_type})
+
+    @classmethod
+    @exception_handling
+    def find_ticket_by_title(cls, title):
+        return Service.find_by(Ticket, {"title": title})
+
+    @classmethod
+    @exception_handling
+    def find_ticket_by_text(cls, text):
+        return Service.find_by(Ticket, {"text": text})
+
+    @classmethod
+    @exception_handling
+    def find_ticket_by_massage(cls, massage):
+        return Service.find_by(Ticket, {"massage": massage})
+
+class TicketGroupController:
+
+    @classmethod
+    @exception_handling
+    def add_ticket_group(cls, name, parent=None, child=None):
+        ticket_group = TicketGroup(name, parent=None, child=None)
+        return True, Service.save(ticket_group, TicketGroup)
