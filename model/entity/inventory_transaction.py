@@ -49,7 +49,3 @@ class InventoryTransaction(Base):
     @status.setter
     def status(self, status):
         self._status = status
-
-
-inventory_transaction = InventoryTransaction(1, "2000-01-01 00:00:00", status=Status.PENDING)
-print(inventory_transaction)
