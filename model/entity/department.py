@@ -71,6 +71,13 @@ class Department(Base):
         self._address = value
 
     @property
+    def department_num(self):
+        return self._department_num
+
+    @department_num.setter
+    def department_num(self, value):
+        self._department_num = value
+    @property
     def phone_number(self):
         return self._phone_number
 

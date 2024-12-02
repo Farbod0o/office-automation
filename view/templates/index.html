@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>اتوماسیون اداری</title>
-    <link rel="stylesheet" href="../statics/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
   </head>
   <body>
     <header class="header">
@@ -31,27 +31,28 @@
     </header>
     <div class="form-container">
       <h2 class="title2">فرم ثبت دپارتمان جدید</h2>
-      <form action="/submit-dep" method="post" enctype="multipart/form-data" id="dep-registration-form">
-          <label for="name">نام دپارتمان:</label>
-          <input type="text" id="name" name="name" class="name" placeholder="نام دپارتمان را وارد کنید" required>
+    <form action="/submit-dep" method="post" enctype="multipart/form-data" id="dep-registration-form">
+      <label for="name">نام دپارتمان:</label>
+      <input type="text" id="name" name="name" class="name" placeholder="نام دپارتمان را وارد کنید" required>
 
-          <label for="phone">شماره تلفن:</label>
-          <input type="tel" id="phone" name="phone" class="phone-number" placeholder="شماره تلفن خود را وارد کنید" required>
+      <label for="phone">شماره تلفن:</label>
+      <input type="tel" id="phone" name="phone" class="phone-number" placeholder="شماره تلفن خود را وارد کنید" required>
 
-          <label for="phone">شماره دپارتمان </label>
-          <input type="tel" id="phone" name="phone" class="department-num" placeholder="شماره دپارتمان مورد نظر را وارد کنید" required>
+      <label for="department-number">شماره دپارتمان:</label>
+      <input type="text" id="department-number" name="department_num" class="department-num" placeholder="شماره دپارتمان مورد نظر را وارد کنید" required>
 
-          <label for="photo">آپلود عکس:</label>
-          <input type="file" id="photo" name="photo" accept="image/*" class="upload" required>
+      <label for="photo">آپلود عکس:</label>
+      <input type="file" id="photo" name="photo" accept="image/*" class="upload" required>
 
-          <label for="short-description">وظایف دپارتمان</label>
-          <textarea id="short-description" name="short-description" rows="3" class="duty"  required></textarea>
+      <label for="short-description">وظایف دپارتمان:</label>
+      <textarea id="short-description" name="short_description" rows="3" class="duty" placeholder="وظایف دپارتمان را وارد کنید" required></textarea>
 
-          <label for="additional-description">توضیحات :</label>
-          <textarea id="additional-description" name="additional-description" class="explain" rows="5"></textarea>
+      <label for="additional-description">توضیحات:</label>
+      <textarea id="additional-description" name="additional_description" class="explain" rows="5" placeholder="توضیحات اضافی (اختیاری)"></textarea>
 
-          <button type="submit">ثبت</button>
-      </form>
+      <button type="submit">ثبت</button>
+    </form>
+
   </div>
   </body>
 </html>

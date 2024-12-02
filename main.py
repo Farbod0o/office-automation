@@ -1,35 +1,43 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from fastapi import FastAPI, Form, File, UploadFile, Request
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 import os
 from controller.controller import Controller
-app = Flask(__name__, template_folder='view/templates',static_folder='view/statics')
-app.config['UPLOAD_FOLDER'] = 'uploads'
 
-# Ensure the upload folder exists
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+app = FastAPI()
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+templates = Jinja2Templates(directory="view/templates")
+app.mount("/static", StaticFiles(directory="view/statics/"), name="static")
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@app.route('/submit-dep', methods=['POST'])
-def submit_dep_form():
+
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.post("/submit-dep")
+async def submit_dep_form(
+        name: str = Form(...),
+        phone: str = Form(...),
+        department_num: str = Form(...),
+        short_description: str = Form(...),
+        additional_description: str = Form(...),
+        photo: UploadFile = File(...)
+):
     print("hi")
-    name = request.form.get('name')
-    phone = request.form.get('phone')
-    department_num = request.form.get('department-num')
-    short_description = request.form.get('short-description')
-    additional_description = request.form.get('additional-description')
 
-    photo = request.files['photo']
-    if photo:
-        photo_path = os.path.join(app.config['UPLOAD_FOLDER'], photo.filename)
-        photo.save(photo_path)
-    status,dep = Controller.add_department(name,1,photo_path,short_description,"address",phone,additional_description)
-    if status:
-        return jsonify({"status": status, })
-    else:
-        return jsonify({"status": status,"message":dep})
+    photo_path = os.path.join(UPLOAD_FOLDER, photo.filename)
+    with open(photo_path, "wb") as buffer:
+        buffer.write(photo.file.read())
+
+    status, dep = Controller.add_department(
+        name, 1, photo_path, short_description, "address", phone, additional_description
+    )
+    return {"status": status, "message": dep}
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+# uvicorn main:app --reload
