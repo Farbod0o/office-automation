@@ -5,12 +5,6 @@ from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME, Enum, Flo
 from sqlalchemy.orm import relationship
 
 
-class Status(Enum):
-    ACTIVE = "active"
-    INACTIVE = "inactive"
-    PENDING = "pending"
-
-
 class Delivery(Base):
     __tablename__ = "delivery_tbl"
     _id = Column("_id", Integer, primary_key=True, autoincrement=True)

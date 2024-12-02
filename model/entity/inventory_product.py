@@ -30,4 +30,3 @@ class InventoryProduct(Base):
     @pattern_validator(r"^\d+$", "")
     def count(self, count):
         self._count = count
-
