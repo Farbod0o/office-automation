@@ -1,14 +1,8 @@
 
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
-from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME, Enum, Float, Double)
+from sqlalchemy import (Column, String, Integer, ForeignKey, DATETIME, Enum, Float)
 from sqlalchemy.orm import relationship
-
-
-class Status(Enum):
-    ACTIVE = "active"
-    INACTIVE = "inactive"
-    PENDING = "pending"
 
 
 class Delivery(Base):
@@ -17,7 +11,7 @@ class Delivery(Base):
     _address = Column("delivery_address", String(50))
     _tracking_number = Column("delivery_tracking_number", String(30))
     _cost = Column("delivery_cost", Float, nullable=False)
-    _status = Column(Enum(Status), nullable=False)
+    _status = Column("delivery_status", Enum("active", "inactive", "pending"))
     _shipped_date = Column(DATETIME)
     _delivery_time = Column(DATETIME)
 
