@@ -121,6 +121,88 @@ class Controller:
         pay = Payment(doc_number, description)
         return True, Service.save(pay, Payment)
 
+
+    # controller for Bank:
+    @classmethod
+    @exception_handling
+    def find_by_bank_name(cls, name):
+        return Service.find_by(Bank, Bank.name == name)
+
+    @classmethod
+    @exception_handling
+    def find_by_account_number(cls, account_number):
+        return Service.find_by(Bank, Bank.account_number == account_number)
+
+    @classmethod
+    @exception_handling
+    def find_by_branch_code(cls, branch_code):
+        return Service.find_by(Bank, Bank.branch_code== branch_code)
+
+
+
+    @classmethod
+    @exception_handling
+    def find_by_payment(cls, payment):
+        return Service.find_by(Bank, Bank.payment == payment)
+
+
+
+    @classmethod
+    @exception_handling
+    def find_by_transaction(cls, transaction):
+        return Service.find_by(Bank, Bank.transaction == transaction)
+
+    # controller for Transaction:
+    @classmethod
+    @exception_handling
+    def find_by_payment_method(cls, payment_method):
+        return Service.find_by(Transaction, Transaction.payment_method == payment_method)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_amount(cls, amount):
+        return Service.find_by(Transaction, Transaction.amount == amount)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_tracking_code(cls, tracking_code):
+        return Service.find_by(Transaction, Transaction.tracking_code == tracking_code)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_date(cls, date):
+        return Service.find_by(Transaction, Transaction.date == date)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_bank(cls, bank):
+        return Service.find_by(Transaction, Transaction.bank == bank)
+
+    # controller for Payment:
+    @classmethod
+    @exception_handling
+    def find_by_doc_number(cls, doc_number):
+        return Service.find_by(Payment, Payment.doc_number == doc_number)
+
+    @classmethod
+    @exception_handling
+    def find_by_date(cls, date):
+        return Service.find_by(Payment, Payment.date == date)
+
+    @classmethod
+    @exception_handling
+    def find_by_bank(cls, bank):
+        return Service.find_by(Payment, Payment.bank == bank)
+
+    @classmethod
+    @exception_handling
+    def find_by_transaction(cls, transaction):
+        return Service.find_by(Payment, Payment.transaction == transaction)
+
     # _____________________________________ALI________________________________________________#
     @classmethod
     @exception_handling
