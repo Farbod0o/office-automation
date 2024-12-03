@@ -1,6 +1,6 @@
 from model.entity import User, Department, ProductGroup, Permission, Role, Person, Ticket, InventoryProduct, Delivery, inventory_transaction
 from model.entity.bank import Bank
-from model.entity.massege import Massage
+from model.entity.message import Message
 from model.entity.payment import Payment
 from model.entity.refrence import Reference
 from model.entity.ticket_group import TicketGroup
@@ -300,34 +300,34 @@ class MassageController:
 
     @classmethod
     @exception_handling
-    def add_massage(cls, title, date_time, membername, text):
-        massage = Massage(title, date_time, membername, text)
-        return True, Service.save(massage, Massage)
+    def add_message(cls, title, date_time, membername, text):
+        message = Message(title, date_time, membername, text)
+        return True, Service.save(message, Message)
 
     @classmethod
     @exception_handling
-    def find_massage_by_title(cls, title):
-        return Service.find_by(Massage, {"title": title})
+    def find_message_by_title(cls, title):
+        return Service.find_by(Message, {"title": title})
 
     @classmethod
     @exception_handling
-    def find_massage_by_date_time(cls, date_time):
-        return Service.find_by(Massage, {"date_time": date_time})
+    def find_message_by_date_time(cls, date_time):
+        return Service.find_by(Message, {"date_time": date_time})
 
     @classmethod
     @exception_handling
-    def find_massage_by_ticket(cls, ticket):
-        return Service.find_by(Massage, {"ticket": ticket})
+    def find_message_by_ticket(cls, ticket):
+        return Service.find_by(Message, {"ticket": ticket})
 
     @classmethod
     @exception_handling
-    def find_massage_by_text(cls, text):
-        return Service.find_by(Massage, {"text": text})
+    def find_message_by_text(cls, text):
+        return Service.find_by(Message, {"text": text})
 
     @classmethod
     @exception_handling
-    def find_massage_by_user(cls, user):
-        return Service.find_by(Massage, {"user": user})
+    def find_message_by_user(cls, user):
+        return Service.find_by(Message, {"user": user})
 
 
 class TicketController:
@@ -360,8 +360,8 @@ class TicketController:
 
     @classmethod
     @exception_handling
-    def find_ticket_by_massage(cls, massage):
-        return Service.find_by(Ticket, {"massage": massage})
+    def find_ticket_by_message(cls, message):
+        return Service.find_by(Ticket, {"massage": message})
 
 
 class TicketGroupController:
