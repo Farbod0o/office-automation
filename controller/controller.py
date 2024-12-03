@@ -1,4 +1,4 @@
-from model.entity import User, Department, ProductGroup, Permission, Role, Person, Ticket
+from model.entity import User, Department, ProductGroup, Permission, Role, Person, Ticket, InventoryProduct, Delivery, inventory_transaction
 from model.entity.bank import Bank
 from model.entity.massege import Massage
 from model.entity.payment import Payment
@@ -371,3 +371,116 @@ class TicketGroupController:
     def add_ticket_group(cls, name, parent=None,):
         ticket_group = TicketGroup(name, parent=None)
         return True, Service.save(ticket_group, TicketGroup)
+
+
+# ____________________________________ALI AKBAR______________________________________#
+
+class InventoryController:
+    @classmethod
+    @exception_handling
+    def add_inventory(cls, title, address, phone):
+        inventory = Inventory(title, address, phone)
+        return True, Service.save(inventory, Inventory)
+
+    @classmethod
+    @exception_handling
+    def find_by_title(cls, title):
+        return Service.find_by(Inventory, {"title": title})
+
+    @classmethod
+    @exception_handling
+    def find_by_address(cls, address):
+        return Service.find_by(Inventory, {"address": address})
+
+    @classmethod
+    @exception_handling
+    def find_by_phone(cls, phone):
+        return Service.find_by(Inventory, {"phone": phone})
+
+    # todo find_by_product
+    # todo find_by_product_transaction
+
+
+class InventoryProductController:
+    @classmethod
+    @exception_handling
+    def add_inventory_product(cls, count):
+        inventory_product = InventoryProduct(count)
+        return True, Service.save(inventory_product, InventoryProduct)
+
+    # todo find_by_product
+    # todo find_by_inventory
+    # todo find_by_inventory_transaction
+
+
+class DeliveryController:
+    @classmethod
+    @exception_handling
+    def add_delivery(cls, address, tracking_number, shipped_date, delivery_time):
+        delivery = Delivery(address, tracking_number, shipped_date, delivery_time)
+        return True, Service.save(delivery, Delivery)
+
+    @classmethod
+    @exception_handling
+    def find_by_address(cls, address):
+        return Service.find_by(Delivery, {"address": address})
+
+    @classmethod
+    @exception_handling
+    def find_by_tracking_number(cls, tracking_number):
+        return Service.find_by(Delivery, {"tracking_number": tracking_number})
+
+    @classmethod
+    @exception_handling
+    def find_by_status(cls, status):
+        return Service.find_by(Delivery, {"status": status})
+
+    @classmethod
+    @exception_handling
+    def find_by_delivery_method(cls, delivery_method):
+        return Service.find_by(Delivery, {"delivery_method": delivery_method})
+
+    @classmethod
+    @exception_handling
+    def find_by_shipping_method(cls, shipping_method):
+        return Service.find_by(Delivery, {"shipping_method": shipping_method})
+
+    @classmethod
+    @exception_handling
+    def find_by_shipping_date(cls, shipping_date):
+        return Service.find_by(Delivery, {"shipping_date": shipping_date})
+
+    @classmethod
+    @exception_handling
+    def find_by_delivery_time(cls, delivery_time):
+        return Service.find_by(Delivery, {"delivery_time": delivery_time})
+
+    # todo find_by_product
+    # todo find_by_inventory
+    # todo find_by_inventory_transaction
+
+
+class InventoryTransactionController:
+    @classmethod
+    @exception_handling
+    def add_inventory_transaction(cls, count, date_time, status):
+        in_transaction = InventoryTransaction(count, date_time, status)
+        return True, Service.save(in_transaction, InventoryTransaction)
+
+    @classmethod
+    @exception_handling
+    def find_by_count(cls, count):
+        return Service.find_by(InventoryTransaction, {"count": count})
+
+    @classmethod
+    @exception_handling
+    def find_by_status(cls, status):
+        return Service.find_by(InventoryTransaction, {"status": status})
+
+    @classmethod
+    @exception_handling
+    def find_by_date_time(cls, date_time):
+        return Service.find_by(InventoryTransaction, {"date_time": date_time})
+
+    # todo find_by_product
+    # todo find_by_inventory_product

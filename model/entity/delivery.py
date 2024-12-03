@@ -12,12 +12,16 @@ class Delivery(Base):
     _tracking_number = Column("delivery_tracking_number", String(30))
     _cost = Column("delivery_cost", Float, nullable=False)
     _status = Column("delivery_status", Enum("active", "inactive", "pending"))
+    _delivery_method = Column("delivery_method", Enum("one", "two", "three"))
     _shipped_date = Column(DATETIME)
     _delivery_time = Column(DATETIME)
 
-    def __init__(self, address, tracking_number, shipped_date, delivery_time):
+    def __init__(self, address, tracking_number, cost, status, delivery_method, shipped_date, delivery_time):
         self._address = address
         self._tracking_number = tracking_number
+        self._cost = cost
+        self._status = status
+        self._delivery_method = delivery_method
         self._shipped_date = shipped_date
         self._delivery_time = delivery_time
 
@@ -37,6 +41,30 @@ class Delivery(Base):
     @pattern_validator(r"^\d+$", "شماره پیگیری معتبر نمی باشد")
     def tracking_number(self, tracking_number):
         self._tracking_number = tracking_number
+
+    @property
+    def cost(self):
+        return self._cost
+
+    @cost.setter
+    def cost(self, cost):
+        self._cost = cost
+
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        self._status = status
+
+    @property
+    def delivery_method(self):
+        return self._delivery_method
+
+    @delivery_method.setter
+    def delivery_method(self, delivery_method):
+        self._delivery_method = delivery_method
 
     @property
     def shipped_date(self):
