@@ -301,7 +301,7 @@ class MassageController:
     @classmethod
     @exception_handling
     def add_message(cls, title, date_time, membername, text):
-        massage = Message(title, date_time, membername, text)
+        message = Message(title, date_time, membername, text)
         return True, Service.save(message, Message)
 
     @classmethod
