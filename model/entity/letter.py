@@ -8,10 +8,10 @@ class Letter(Base):
     __tablename__ = "letter"
 
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
-    _title = Column("title", String, nullable=False)
-    _content = Column("content", String, nullable=False)
-    _sender = Column("sender", String, nullable=False)
-    _receiver = Column("receiver", String, nullable=False)
+    _title = Column("title", String(50), nullable=False)
+    _content = Column("content", String(50), nullable=False)
+    _sender = Column("sender", String(50), nullable=False)
+    _receiver = Column("receiver", String(50), nullable=False)
     _created_at = Column("created_at", DateTime, nullable=False)
     _reference_id = Column("reference_id", Integer, ForeignKey("reference.id"), nullable=False)
 
