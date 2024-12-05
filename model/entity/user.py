@@ -16,6 +16,8 @@ class User(Base):
 
     roles = relationship("Role", secondary="user_role_tbl", back_populates="users")
     person = relationship("Person", back_populates="user")
+    sent_letters = relationship("Letter", back_populates="sender_user", cascade="all, delete-orphan")
+    received_letters = relationship("Letter", back_populates="receiver_user", cascade="all, delete-orphan")
 
     def init(self, user_name, password, email, role_id, person_id):
         self.user_name = user_name
