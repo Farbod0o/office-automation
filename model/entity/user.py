@@ -11,10 +11,10 @@ class User(Base):
     _user_name = Column("user_name", String(30), nullable=False, unique=True)
     _password = Column("password", String(128), nullable=False)
     _email = Column("email", String(50), unique=True)
-    # _role_id = Column("role_id", Integer, ForeignKey("role_tbl.id"), nullable=False)
+    _role_id = Column("role_id", Integer, ForeignKey("role_tbl.id"), nullable=False)
     _person_id = Column("person_id", Integer, ForeignKey("person_tbl.id"), nullable=False)
 
-    # roles = relationship("Role", secondary="user_role_tbl", back_populates="users")
+    roles = relationship("Role", secondary="user_role_tbl", back_populates="users")
     person = relationship("Person", back_populates="user")
 
     def init(self, user_name, password, email, role_id, person_id):
