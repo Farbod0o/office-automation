@@ -404,8 +404,8 @@ class InventoryController:
 class InventoryProductController:
     @classmethod
     @exception_handling
-    def add_inventory_product(cls, count):
-        inventory_product = InventoryProduct(count)
+    def add_inventory_product(cls, count, inventory):
+        inventory_product = InventoryProduct(count, inventory)
         return True, Service.save(inventory_product, InventoryProduct)
 
     # todo find_by_product
