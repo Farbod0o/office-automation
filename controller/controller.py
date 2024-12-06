@@ -1,5 +1,6 @@
 from model.entity import User, Department, ProductGroup, Permission, Role, Person, Ticket, InventoryProduct, Delivery, inventory_transaction
 from model.entity.bank import Bank
+from model.entity.letter import Letter
 from model.entity.message import Message
 from model.entity.payment import Payment
 from model.entity.refrence import Reference
@@ -102,6 +103,33 @@ class Controller:
     def find_by_receive_send(cls, receive_send):
         return Service.find_by(Reference, Reference._receive_send == receive_send)
 
+    class LetterController:
+        @classmethod
+        @exception_handling
+        def add_letter(cls, title, content, sender_user_id, receiver_user_id, created_at, reference_id):
+            letter = Letter(title, content, sender_user_id, receiver_user_id, created_at, reference_id)
+            return True, Service.save(letter, Letter)
+
+        @classmethod
+        @exception_handling
+        def find_letter_by_id(cls, letter_id):
+            return Service.find_by_id(Letter, letter_id)
+
+        @classmethod
+        @exception_handling
+        def find_letters_by_sender(cls, sender_user_id):
+            return Service.find_by(Letter, {"sender_user_id": sender_user_id})
+
+        @classmethod
+        @exception_handling
+        def find_letters_by_receiver(cls, receiver_user_id):
+            return Service.find_by(Letter, {"receiver_user_id": receiver_user_id})
+
+        @classmethod
+        @exception_handling
+        def find_letters_by_reference(cls, reference_id):
+            return Service.find_by(Letter, {"reference_id": reference_id})
+
     # ____________________________________MAHTAB______________________________________#
     @classmethod
     @exception_handling
@@ -120,6 +148,88 @@ class Controller:
     def add_payment(cls, doc_number, description):
         pay = Payment(doc_number, description)
         return True, Service.save(pay, Payment)
+
+
+    # controller for Bank:
+    @classmethod
+    @exception_handling
+    def find_by_bank_name(cls, name):
+        return Service.find_by(Bank, Bank.name == name)
+
+    @classmethod
+    @exception_handling
+    def find_by_account_number(cls, account_number):
+        return Service.find_by(Bank, Bank.account_number == account_number)
+
+    @classmethod
+    @exception_handling
+    def find_by_branch_code(cls, branch_code):
+        return Service.find_by(Bank, Bank.branch_code== branch_code)
+
+
+
+    @classmethod
+    @exception_handling
+    def find_by_payment(cls, payment):
+        return Service.find_by(Bank, Bank.payment == payment)
+
+
+
+    @classmethod
+    @exception_handling
+    def find_by_transaction(cls, transaction):
+        return Service.find_by(Bank, Bank.transaction == transaction)
+
+    # controller for Transaction:
+    @classmethod
+    @exception_handling
+    def find_by_payment_method(cls, payment_method):
+        return Service.find_by(Transaction, Transaction.payment_method == payment_method)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_amount(cls, amount):
+        return Service.find_by(Transaction, Transaction.amount == amount)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_tracking_code(cls, tracking_code):
+        return Service.find_by(Transaction, Transaction.tracking_code == tracking_code)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_date(cls, date):
+        return Service.find_by(Transaction, Transaction.date == date)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_bank(cls, bank):
+        return Service.find_by(Transaction, Transaction.bank == bank)
+
+    # controller for Payment:
+    @classmethod
+    @exception_handling
+    def find_by_doc_number(cls, doc_number):
+        return Service.find_by(Payment, Payment.doc_number == doc_number)
+
+    @classmethod
+    @exception_handling
+    def find_by_date(cls, date):
+        return Service.find_by(Payment, Payment.date == date)
+
+    @classmethod
+    @exception_handling
+    def find_by_bank(cls, bank):
+        return Service.find_by(Payment, Payment.bank == bank)
+
+    @classmethod
+    @exception_handling
+    def find_by_transaction(cls, transaction):
+        return Service.find_by(Payment, Payment.transaction == transaction)
 
     # _____________________________________ALI________________________________________________#
     @classmethod
@@ -212,19 +322,16 @@ class Controller:
         def find_user_by_id(cls, user_id):
             return Service.find_by_id(User, user_id)
 
-        # todo: shart {"user_name": user_name}
         @classmethod
         @exception_handling
         def find_user_by_user_name(cls, user_name):
             return Service.find_by(User, {"user_name": user_name})
 
-        # todo: shart {"role_id": role_id}
         @classmethod
         @exception_handling
         def find_users_by_role(cls, role_id):
             return Service.find_by(User, {"role_id": role_id})
 
-        # todo: shart {"person_id": person_id}
         @classmethod
         @exception_handling
         def find_users_by_person(cls, person_id):
@@ -244,7 +351,6 @@ class PermissionController:
     def find_permission_by_id(cls, permission_id):
         return Service.find_by_id(Permission, permission_id)
 
-    # todo: shart {"name": name}
     @classmethod
     @exception_handling
     def find_permission_by_name(cls, name):
@@ -264,7 +370,6 @@ class RoleController:
     def find_role_by_id(cls, role_id):
         return Service.find_by_id(Role, role_id)
 
-    # todo: shart {"role_name": role_name}
     @classmethod
     @exception_handling
     def find_role_by_name(cls, role_name):
@@ -295,7 +400,7 @@ class PersonController:
             raise ValueError(f"شخصی با کد ملی {national_code} یافت نشد.")
         return result
 
-
+#_________________________________________mahsa________________________________________________________________
 class MassageController:
 
     @classmethod
