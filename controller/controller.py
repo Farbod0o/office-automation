@@ -322,19 +322,16 @@ class Controller:
         def find_user_by_id(cls, user_id):
             return Service.find_by_id(User, user_id)
 
-        # todo: shart {"user_name": user_name}
         @classmethod
         @exception_handling
         def find_user_by_user_name(cls, user_name):
             return Service.find_by(User, {"user_name": user_name})
 
-        # todo: shart {"role_id": role_id}
         @classmethod
         @exception_handling
         def find_users_by_role(cls, role_id):
             return Service.find_by(User, {"role_id": role_id})
 
-        # todo: shart {"person_id": person_id}
         @classmethod
         @exception_handling
         def find_users_by_person(cls, person_id):
@@ -354,7 +351,6 @@ class PermissionController:
     def find_permission_by_id(cls, permission_id):
         return Service.find_by_id(Permission, permission_id)
 
-    # todo: shart {"name": name}
     @classmethod
     @exception_handling
     def find_permission_by_name(cls, name):
@@ -374,7 +370,6 @@ class RoleController:
     def find_role_by_id(cls, role_id):
         return Service.find_by_id(Role, role_id)
 
-    # todo: shart {"role_name": role_name}
     @classmethod
     @exception_handling
     def find_role_by_name(cls, role_name):
