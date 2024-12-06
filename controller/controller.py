@@ -1,5 +1,6 @@
 from model.entity import User, Department, ProductGroup, Permission, Role, Person, Ticket, InventoryProduct, Delivery, inventory_transaction
 from model.entity.bank import Bank
+from model.entity.letter import Letter
 from model.entity.message import Message
 from model.entity.payment import Payment
 from model.entity.refrence import Reference
@@ -101,6 +102,33 @@ class Controller:
     @exception_handling
     def find_by_receive_send(cls, receive_send):
         return Service.find_by(Reference, Reference._receive_send == receive_send)
+
+    class LetterController:
+        @classmethod
+        @exception_handling
+        def add_letter(cls, title, content, sender_user_id, receiver_user_id, created_at, reference_id):
+            letter = Letter(title, content, sender_user_id, receiver_user_id, created_at, reference_id)
+            return True, Service.save(letter, Letter)
+
+        @classmethod
+        @exception_handling
+        def find_letter_by_id(cls, letter_id):
+            return Service.find_by_id(Letter, letter_id)
+
+        @classmethod
+        @exception_handling
+        def find_letters_by_sender(cls, sender_user_id):
+            return Service.find_by(Letter, {"sender_user_id": sender_user_id})
+
+        @classmethod
+        @exception_handling
+        def find_letters_by_receiver(cls, receiver_user_id):
+            return Service.find_by(Letter, {"receiver_user_id": receiver_user_id})
+
+        @classmethod
+        @exception_handling
+        def find_letters_by_reference(cls, reference_id):
+            return Service.find_by(Letter, {"reference_id": reference_id})
 
     # ____________________________________MAHTAB______________________________________#
     @classmethod
@@ -377,7 +405,7 @@ class PersonController:
             raise ValueError(f"شخصی با کد ملی {national_code} یافت نشد.")
         return result
 
-
+#_________________________________________mahsa________________________________________________________________
 class MassageController:
 
     @classmethod
