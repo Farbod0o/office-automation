@@ -10,7 +10,6 @@ class Inventory(Base):
     _title = Column("inventory_title", String(40))
     _address = Column("inventory_address", String(30))
     _phone = Column("inventory_phone", String(11))
-    _inventory_product = Column("inventory_product", String(30))
 
     inventory_product = relationship("InventoryProduct", back_populates="inventory")
 

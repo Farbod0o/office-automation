@@ -11,6 +11,9 @@ class InventoryTransaction(Base):
     _date_time = Column(DATETIME)
     _status = Column("status", Enum("active", "inactive", "pending"))
 
+    inventory_product = relationship("InventoryProduct", back_populates="inventory_transaction")
+    delivery = relationship("Delivery", back_populates="inventory_transaction")
+
     def __init__(self, count, date_time, status):
         self._id = None
         self._count = count

@@ -509,8 +509,8 @@ class InventoryController:
 class InventoryProductController:
     @classmethod
     @exception_handling
-    def add_inventory_product(cls, count, inventory):
-        inventory_product = InventoryProduct(count, inventory)
+    def add_inventory_product(cls, count, inventory, inventory_transaction):
+        inventory_product = InventoryProduct(count, inventory, inventory, inventory_transaction)
         return True, Service.save(inventory_product, InventoryProduct)
 
     # todo find_by_product
@@ -521,8 +521,8 @@ class InventoryProductController:
 class DeliveryController:
     @classmethod
     @exception_handling
-    def add_delivery(cls, address, tracking_number, shipped_date, delivery_time):
-        delivery = Delivery(address, tracking_number, shipped_date, delivery_time)
+    def add_delivery(cls, address, tracking_number, cost, status, delivery_method, shipped_date, delivery_time, inventory_transaction):
+        delivery = Delivery(address, tracking_number, cost, status, delivery_method, shipped_date, delivery_time, inventory_transaction)
         return True, Service.save(delivery, Delivery)
 
     @classmethod
