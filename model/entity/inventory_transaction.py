@@ -15,10 +15,10 @@ class InventoryTransaction(Base):
     delivery = relationship("Delivery", back_populates="inventory_transaction")
 
     def __init__(self, count, date_time, status):
-        self._id = None
-        self._count = count
-        self._date_time = date_time
-        self._status = status
+        self.id = None
+        self.count = count
+        self.date_time = date_time
+        self.status = status
 
     @property
     def id(self):

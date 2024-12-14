@@ -14,10 +14,10 @@ class Inventory(Base):
     Inventory_product = relationship("InventoryProduct", back_populates="inventory")
 
     def __init__(self, title, address, phone):
-        self._id = None
-        self._title = title
-        self._address = address
-        self._phone = phone
+        self.id = None
+        self.title = title
+        self.address = address
+        self.phone = phone
 
     @property
     def id(self):
@@ -49,6 +49,6 @@ class Inventory(Base):
         return self._phone
 
     @phone.setter
-    @pattern_validator(r"^\d{11}$", "شماره تماس مورد نظر صحیح نمی باشد")
+    @pattern_validator(r"^09\d{9}$", "شماره تماس مورد نظر صحیح نمی باشد")
     def phone(self, phone):
         self._phone = phone

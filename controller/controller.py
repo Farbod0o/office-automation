@@ -2,7 +2,7 @@ from model.entity import User, Department, ProductGroup, Permission, Role, Perso
 from model.entity.bank import Bank
 from model.entity.message import Message
 from model.entity.payment import Payment
-from model.entity.refrence import Reference
+# from model.entity.refrence import Reference
 from model.entity.ticket_group import TicketGroup
 from model.entity.transaction import Transaction
 from model.entity.unit import Unit
@@ -462,7 +462,8 @@ class InventoryController:
     @exception_handling
     def add_inventory(cls, title, address, phone):
         inventory = Inventory(title, address, phone)
-        return True, Service.save(inventory, Inventory)
+        Service.save(inventory, Inventory)
+        return True, inventory
 
     @classmethod
     @exception_handling
@@ -486,11 +487,12 @@ class InventoryController:
 class InventoryProductController:
     @classmethod
     @exception_handling
-    def add_inventory_product(cls, count):
-        inventory_product = InventoryProduct(count)
-        return True, Service.save(inventory_product, InventoryProduct)
+    def add_inventory_product(cls, count, inventory, inventory_transaction):
+        inventory_product = InventoryProduct(count, inventory, inventory_transaction)
+        Service.save(inventory_product, InventoryProduct)
+        return True, inventory_product
 
-    # todo find_by_product
+        # todo find_by_product
     # todo find_by_inventory
     # todo find_by_inventory_transaction
 
@@ -500,7 +502,8 @@ class DeliveryController:
     @exception_handling
     def add_delivery(cls, address, tracking_number, shipped_date, delivery_time):
         delivery = Delivery(address, tracking_number, shipped_date, delivery_time)
-        return True, Service.save(delivery, Delivery)
+        Service.save(delivery, Delivery)
+        return True, delivery
 
     @classmethod
     @exception_handling
@@ -547,7 +550,8 @@ class InventoryTransactionController:
     @exception_handling
     def add_inventory_transaction(cls, count, date_time, status):
         in_transaction = InventoryTransaction(count, date_time, status)
-        return True, Service.save(in_transaction, InventoryTransaction)
+        Service.save(in_transaction, InventoryTransaction)
+        return True, in_transaction
 
     @classmethod
     @exception_handling

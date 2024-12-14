@@ -9,14 +9,17 @@ class InventoryProduct(Base):
 
     _id = Column("_id", Integer, primary_key=True, autoincrement=True)
     _count = Column("product_inventory_count", Integer)
-    _inv_id = Column("inventory_id", Integer, ForeignKey("inventory_tbl._id"))
+    _inventory_id = Column("inventory_id", Integer, ForeignKey("inventory_tbl._id"))
+    _inventory_transaction_id = Column("inventory_transaction_id", Integer, ForeignKey("inventory_transaction_tbl._id"))
 
     inventory = relationship("Inventory", lazy="joined")
+    inventory_transaction = relationship("InventoryTransaction", back_populates="inventory_product", lazy="joined")
 
-    def __init__(self, count, inventory):
-        self._id = None
-        self._count = count
-        self._inv_id = inventory.id
+    def __init__(self, count, inventory, inventory_transaction):
+        self.id = None
+        self.count = count
+        self.inventory_id = inventory.id
+        self.inventory_transaction_id = inventory_transaction.id
 
     @property
     def id(self):
