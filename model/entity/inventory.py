@@ -11,7 +11,7 @@ class Inventory(Base):
     _address = Column("inventory_address", String(30))
     _phone = Column("inventory_phone", String(11))
 
-
+    Inventory_product = relationship("InventoryProduct", back_populates="inventory")
 
     def __init__(self, title, address, phone):
         self._id = None
