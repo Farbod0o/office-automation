@@ -11,9 +11,9 @@ class InventoryProduct(Base):
     _count = Column("product_inventory_count", Integer)
     _inv_id = Column("inventory_id", Integer, ForeignKey("inventory_tbl._id"))
 
-    inv_id = relationship("Inventory",lazy="joined")
+    inventory = relationship("Inventory", lazy="joined")
 
-    def __init__(self, count,inventory):
+    def __init__(self, count, inventory):
         self._id = None
         self._count = count
         self._inv_id = inventory.id
