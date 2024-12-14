@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 
 class Ticket(Base):
     __tablename__ = "ticket_tbl"
-    _id = Column("ticket_id", Integer, primary_key=True, autoincrement=True)
+    _id = Column("id", Integer, primary_key=True, autoincrement=True)
     # _userID = Column("user_id", Integer, ForeignKey("person_tbl._id"), nullable=False)
     _title = Column("department_title", String(30), nullable=False, unique=True)
     _ticket_datetime = Column(DATETIME)
@@ -14,7 +14,7 @@ class Ticket(Base):
     _text = Column("text", String(250), nullable=False)
 
     # _group = Column(Integer, ForeignKey("group_tbl._id"), nullable=True)
-    #
+    messages = relationship("Message", back_populates="ticket")
     # user = relationship("Person", foreign_keys=[_userID], lazy='joined')
     # gp = relationship("Group", foreign_keys=[_group], lazy='joined')
 

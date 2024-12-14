@@ -11,6 +11,8 @@ class Inventory(Base):
     _address = Column("inventory_address", String(30))
     _phone = Column("inventory_phone", String(11))
 
+
+
     def __init__(self, title, address, phone):
         self._id = None
         self._title = title

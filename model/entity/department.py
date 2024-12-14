@@ -9,7 +9,7 @@ class Department(Base):
     __tablename__ = "department_tbl"
     _id = Column("_id", Integer, primary_key=True, autoincrement=True)
     _name = Column("organization_name", String(30), nullable=False, unique=True)
-    _logo = Column("organization_logo", String(20), nullable=False, unique=False)
+    _logo = Column("organization_logo", String(255), nullable=False, unique=False)
     _address = Column("organization_address", String(100), nullable=False, unique=False)
     _phone_number = Column("organization_phone_number", String(11), nullable=False, unique=False)
     _department_num = Column("department_num", String(20), nullable=False, unique=False)

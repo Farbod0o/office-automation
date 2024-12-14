@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Submission</title>
+    <link rel="stylesheet" href="/static/css/toast.css">
+</head>
+<body>
+
+<h1>Submit a New Department</h1>
+<form id="dep-registration-form" enctype="multipart/form-data" method="post" action="/submit-dep">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="phone" placeholder="Phone" required>
+    <input type="text" name="department_num" placeholder="Department Number" required>
+    <textarea name="short_description" placeholder="Short Description" required></textarea>
+    <textarea name="additional_description" placeholder="Additional Description"></textarea>
+    <input type="file" name="photo" required>
+    <button type="submit">Submit</button>
+</form>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<script src="/static/js/toast.js"></script>
+<script src="/static/js/main.js"></script>
+
+</body>
+</html>

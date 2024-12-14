@@ -26,14 +26,13 @@ async def submit_dep_form(
         additional_description: str = Form(...),
         photo: UploadFile = File(...)
 ):
-    print("hi")
 
     photo_path = os.path.join(UPLOAD_FOLDER, photo.filename)
     with open(photo_path, "wb") as buffer:
         buffer.write(photo.file.read())
 
     status, dep = Controller.add_department(
-        name, 1, photo_path, short_description, "address", phone, additional_description
+        name, department_num, photo_path, short_description, "address", phone, additional_description
     )
     return {"status": status, "message": dep}
 

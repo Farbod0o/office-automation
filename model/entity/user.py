@@ -16,7 +16,7 @@ class User(Base):
 
     # roles = relationship("Role", secondary="user_role_tbl", back_populates="users")
     person = relationship("Person", back_populates="user")
-
+    messages = relationship("Message", back_populates="user")
     def init(self, user_name, password, email, role_id, person_id):
         self.user_name = user_name
         self.password = password

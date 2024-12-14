@@ -1,0 +1,52 @@
+#toast-container {
+    position: fixed;
+    top: 20px; /* فاصله از بالا */
+    right: 20px; /* فاصله از سمت راست */
+    z-index: 1000; /* برای قرار گرفتن بالاتر از سایر عناصر */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.toast {
+    background-color: #333; /* رنگ پس‌زمینه پیش‌فرض */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.info {
+    background-color: #2196F3;
+}
+
+.toast.success {
+    background-color: #4CAF50;
+}
+
+.toast.warning {
+    background-color: #FFC107;
+}
+
+.toast.error {
+    background-color: #F44336;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    float: right;
+}
