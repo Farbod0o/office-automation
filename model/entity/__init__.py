@@ -18,6 +18,6 @@ from model.entity.inventory import Inventory
 from model.entity.inventory_product import InventoryProduct
 from model.entity.delivery import Delivery
 from model.entity.inventory_transaction import InventoryTransaction
-
+from model.entity.letter import Letter
 __all__ = ["Person", "Department","Section","Group","Ticket","ProductGroup","Product","Product_Property_Value","unit"
-           ,"Role","User","Permission", "Inventory","InventoryProduct","Delivery","InventoryTransaction"]
+           ,"Role","User","Permission", "Inventory","InventoryProduct","Delivery","InventoryTransaction","Letter"]

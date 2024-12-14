@@ -15,8 +15,11 @@ class Delivery(Base):
     _delivery_method = Column("delivery_method", Enum("one", "two", "three"))
     _shipped_date = Column(DATETIME)
     _delivery_time = Column(DATETIME)
+    _inventory_transaction_id = Column("inventory_transaction_id", Integer, ForeignKey("inventory_transaction_tbl._id"))
 
-    def __init__(self, address, tracking_number, cost, status, delivery_method, shipped_date, delivery_time):
+    inventory_transaction = relationship("InventoryTransaction", back_populates="delivery", lazy="joined")
+
+    def __init__(self, address, tracking_number, cost, status, delivery_method, shipped_date, delivery_time, inventory_transaction):
         self._address = address
         self._tracking_number = tracking_number
         self._cost = cost
@@ -24,6 +27,7 @@ class Delivery(Base):
         self._delivery_method = delivery_method
         self._shipped_date = shipped_date
         self._delivery_time = delivery_time
+        self._inventory_transaction_id = inventory_transaction.id
 
     @property
     def address(self):

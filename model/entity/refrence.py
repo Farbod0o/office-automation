@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String, DateTime, Enum, Boolean
 from sqlalchemy.orm import relationship
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
-import enum
 
 class Reference(Base):
     __tablename__ = "reference_tbl"
@@ -20,6 +19,8 @@ class Reference(Base):
     _confirmation = Column("confirmation", String(50))
     _receive_send = Column("receive_send", Enum("recive","send"), nullable=False)
     _access_level = Column("access_level", String(50))
+    letters = relationship("letter", back_populates="reference_tbl")
+
 
     def __init__(self, reference_num, type_, security, referral_date_time, status, receive_send, priority=None,
                  expire_date_time=None, paraph=None, description=None, confirmation=None, access_level=None):
