@@ -10,7 +10,7 @@ templates = Jinja2Templates(directory="view/templates")
 app.mount("/static", StaticFiles(directory="view/statics/"), name="static")
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
+# salam
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
