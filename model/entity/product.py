@@ -12,7 +12,10 @@ class Product(Base):
     _code = Column("code", Integer, nullable=False)
     _description = Column("description", String(200), nullable=False)
     _image = Column("image", String(30), nullable=False)
-    unit = relationship("Unit", back_populates="product")
+
+
+    units = relationship("Unit", back_populates="product")
+
 
     def __init__(self, name, price, code, description, image):
         self._id = None
