@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String,ForeignKey
 from model.entity.base import Base
 from model.tools.validator import pattern_validator
 
@@ -8,7 +8,7 @@ class Group_property(Base):
     _id = Column("id", Integer, primary_key=True, nullable=False,autoincrement=True)
     _title = Column("_title", String(30), nullable=False)
 
-    def __init__(self, id, title):
+    def __init__(self,title):
         self._id = None
         self._title = title
 

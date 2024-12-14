@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from model.da.data_access import Base
 from model.tools.validator import pattern_validator
 from sqlalchemy import Column, Integer, String
@@ -9,6 +11,7 @@ class Unit(Base):
     _name = Column("name", String(30), nullable=False)
     _amount = Column("amount", Integer, nullable=False)
     _description = Column("description", String(200), nullable=False)
+    product = relationship("product", back_populates="unit_tbl")
 
     def __init__(self, name, amount, description):
         self._id = None
