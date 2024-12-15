@@ -87,7 +87,3 @@ class Product_Property_Value(Base):
         else:
             raise ValueError("متریال معتبر نیست")
 
-
-
-test = Product_Property_Value("wswsw","hfuwhfwuwfi","hfkuHWKEF","EHFKwhfk","wefkwhfi")
-print(test)

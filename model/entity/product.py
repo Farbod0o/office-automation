@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from model.entity.base import Base
+from model.da.data_access import Base
 from model.tools.validator import pattern_validator
 from sqlalchemy.orm import relationship
 

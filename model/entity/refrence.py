@@ -19,7 +19,7 @@ class Reference(Base):
     _confirmation = Column("confirmation", String(50))
     _receive_send = Column("receive_send", Enum("recive","send"), nullable=False)
     _access_level = Column("access_level", String(50))
-    letters = relationship("letter", back_populates="reference_tbl")
+    # letters = relationship("letter", back_populates="reference_tbl")
 
 
     def __init__(self, reference_num, type_, security, referral_date_time, status, receive_send, priority=None,

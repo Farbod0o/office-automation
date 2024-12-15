@@ -15,8 +15,8 @@ class Section(Base):
     _access_level = Column("access_level", String(15), nullable=False)
     _parent_section_id = Column(Integer, ForeignKey("section_tbl.section_code"), nullable=True)
     _description = Column("section_description", String(100), nullable=False)
-    _department_id = Column(Integer, ForeignKey("department_tbl._id"), nullable=True)
     parent_section = relationship("Section", remote_side=[_id], lazy='joined')
+    _department_id = Column(Integer, ForeignKey("department_tbl._id"), nullable=True)
     dep_id = relationship("Department", back_populates="sections")
 
     def __init__(self, name, address, phone_number, internal_code, access_lvl, section_num, parent_section_num=None,

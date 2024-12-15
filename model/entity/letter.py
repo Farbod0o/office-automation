@@ -8,15 +8,15 @@ class Letter(Base):
     __tablename__ = "letter_tbl"
 
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
-    _title = Column("title", String, nullable=False)
-    _content = Column("content", String, nullable=False)
-    _sender = Column("sender", String, nullable=False)
-    _receiver = Column("receiver", String, nullable=False)
+    _title = Column("title", String(30), nullable=False)
+    _content = Column("content", String(30), nullable=False)
+    _sender = Column("sender", String(30), nullable=False)
+    _receiver = Column("receiver", String(30), nullable=False)
     _created_at = Column("created_at", DateTime, nullable=False)
-    _reference_id = Column("reference_id", Integer, ForeignKey("reference.id"), nullable=False)
+    # _reference_id = Column("reference_id", Integer, ForeignKey("reference.id"), nullable=False)
 
 
-    reference = relationship("reference", back_populates="letters_tbl")
+    # reference = relationship("reference", back_populates="letters_tbl")
 
     def __init__(self, title, content, sender, receiver, created_at, reference_id):
         self.title = title

@@ -8,7 +8,7 @@ Base = declarative_base()
 
 class DataAccess:
     def __init__(self, entity_class):
-        connection_string = "mysql+pymysql://root:root123@localhost:3306/office-automation"
+        connection_string = "mysql+pymysql://root:root@localhost:3306/office-automation"
         if not database_exists(connection_string):
             create_database(connection_string)
 
