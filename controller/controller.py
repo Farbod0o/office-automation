@@ -2,7 +2,7 @@ from model.entity import User, Department, ProductGroup, Permission, Role, Perso
 from model.entity.bank import Bank
 from model.entity.message import Message
 from model.entity.payment import Payment
-# from model.entity.refrence import Reference
+from model.entity.refrence import Reference
 from model.entity.ticket_group import TicketGroup
 from model.entity.transaction import Transaction
 from model.entity.unit import Unit
@@ -500,8 +500,8 @@ class InventoryProductController:
 class DeliveryController:
     @classmethod
     @exception_handling
-    def add_delivery(cls, address, tracking_number, shipped_date, delivery_time):
-        delivery = Delivery(address, tracking_number, shipped_date, delivery_time)
+    def add_delivery(cls, address, tracking_number, cost, status, delivery_method, shipped_date, delivery_time, inventory_transaction):
+        delivery = Delivery(address, tracking_number, cost, status, delivery_method, shipped_date, delivery_time, inventory_transaction)
         Service.save(delivery, Delivery)
         return True, delivery
 
