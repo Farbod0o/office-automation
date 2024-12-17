@@ -1,12 +1,15 @@
 from sqlalchemy import Column, Integer, String,ForeignKey
 from model.entity.base import Base
 from model.tools.validator import pattern_validator
+from sqlalchemy.orm import relationship
 
 
 class Group_property(Base):
     __tablename__ = "group_property_tbl"
     _id = Column("id", Integer, primary_key=True, nullable=False,autoincrement=True)
     _title = Column("_title", String(30), nullable=False)
+
+    group = relationship("Product_Property_Value",back_populates="Group_property")
 
     def __init__(self,title):
         self._id = None

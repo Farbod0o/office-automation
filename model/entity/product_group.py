@@ -10,8 +10,8 @@ class ProductGroup(Base):
     _name = Column("name", String(30), nullable=False)
     _parent_id = Column(Integer, ForeignKey("product_group.id"))
     _child_id = Column(Integer, ForeignKey("product_group.id"))
-    #products = relationship("Product", back_populates="product_group")
-    #parent = relationship("ProductGroup",remote_side=[_id],foreign_keys=[_parent_id],backref="children")
+
+    product_gp = relationship("ProductGroup", back_populates="ProductGroup")
 
     def __init__(self, name):
         self._id = None

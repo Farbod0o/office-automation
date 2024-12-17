@@ -15,7 +15,7 @@ class Product(Base):
 
 
     units = relationship("Unit", back_populates="product")
-
+    products = relationship("Product_Property_Value",back_populates="product")
 
     def __init__(self, name, price, code, description, image):
         self._id = None

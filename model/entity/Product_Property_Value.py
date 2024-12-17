@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from model.entity.base import Base
 from model.tools.validator import pattern_validator
+from sqlalchemy.orm import relationship
 
 
 class Product_Property_Value(Base):
@@ -11,6 +12,8 @@ class Product_Property_Value(Base):
     _weight = Column("weight", Integer, nullable=False)
     _description = Column("description", String(200), nullable=False)
     _material = Column("material", String(30), nullable=False)
+
+    product = relationship("product",back_populates="Product_Property_Value")
 
     def __init__(self, color, size, weight, description, material):
         self._id = None
